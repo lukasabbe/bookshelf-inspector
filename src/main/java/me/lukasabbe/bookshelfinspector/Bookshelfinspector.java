@@ -11,14 +11,14 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
-
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Bookshelfinspector implements ModInitializer {
     public static MinecraftServer serverInstance;
     public final static String MOD_ID = "bookshelfinspector";
 
-    public static Logger LOGGER = Logger.getLogger(MOD_ID);
+    public static Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
