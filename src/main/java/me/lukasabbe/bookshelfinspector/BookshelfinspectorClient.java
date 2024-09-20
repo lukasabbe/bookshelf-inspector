@@ -36,7 +36,7 @@ public class BookshelfinspectorClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,
                 (payload, context) -> context.client().execute(() ->{
-                    Bookshelfinspector.LOGGER.info("Connected to server");
+                    Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
                     modAvailable = true;
                 }));
     }
