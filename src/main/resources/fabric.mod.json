@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "bookshelfinspector",
+  "version": "${version}",
+  "name": "Bookshelfinspector",
+  "description": "Inspect any book in a chiseled bookshelf.",
+  "authors": ["Lukasabbe"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/bookshelfinspector/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.lukasabbe.bookshelfinspector.BookshelfinspectorClient"
+    ],
+    "main": [
+      "me.lukasabbe.bookshelfinspector.Bookshelfinspector"
+    ]
+  },
+  "mixins": [
+    "bookshelfinspector.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=${minecraft_version}",
+    "fabric-api-base": "*",
+    "fabric-networking-api-v1": "*",
+    "fabric-lifecycle-events-v1": "*"
+  }
+}

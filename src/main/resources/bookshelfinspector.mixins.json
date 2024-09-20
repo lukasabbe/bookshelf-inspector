@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.lukasabbe.bookshelfinspector.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "InGameHudMixin",
+    "BookshelfInvoker",
+    "BookshelfMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
