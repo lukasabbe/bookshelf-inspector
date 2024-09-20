@@ -1,6 +1,5 @@
 package me.lukasabbe.bookshelfinspector.mixin;
 
-import me.lukasabbe.bookshelfinspector.Bookshelfinspector;
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
 import net.minecraft.client.MinecraftClient;
@@ -30,7 +29,7 @@ public class InGameHudMixin {
 
         if(client.options.hudHidden) return;
 
-        if(BookshelfinspectorClient.isCurrentBookDataToggled){
+        if(BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled){
             final BookData currentBookData = BookshelfinspectorClient.currentBookData;
             int screenWidth = client.getWindow().getScaledWidth();
             int screenHeight = client.getWindow().getScaledHeight();

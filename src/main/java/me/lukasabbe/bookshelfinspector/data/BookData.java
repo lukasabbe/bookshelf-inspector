@@ -13,4 +13,8 @@ public class BookData {
         this.pos = pos;
         this.slotId = slotId;
     }
+
+    public static BookData empty(){
+        return new BookData(ItemStack.EMPTY, null, -1);
+    }
 }

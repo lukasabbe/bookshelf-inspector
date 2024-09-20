@@ -10,7 +10,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChiseledBookshelfBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -49,7 +49,8 @@ public class BookshelfMixin{
 
         Optional<ChiseledBookshelfBlockEntity> optionalChiseledBookshelfBlockEntity = client.player.getWorld().getBlockEntity(pos, BlockEntityType.CHISELED_BOOKSHELF);
         if(optionalChiseledBookshelfBlockEntity.isEmpty()){
-            BookshelfinspectorClient.isCurrentBookDataToggled = false;
+            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
+            BookshelfinspectorClient.currentBookData = BookData.empty();
             return;
         }
 
@@ -59,15 +60,25 @@ public class BookshelfMixin{
 
         OptionalInt optionalInt = ((BookshelfInvoker)bookshelfBlock).invokerGetSlotForHitPos(blockHitResult,blockState);
         if(optionalInt.isEmpty()) {
-            BookshelfinspectorClient.isCurrentBookDataToggled = false;
+            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
             return;
         }
 
-        BookshelfinspectorClient.latestHit = hit;
-
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
-        if(currentBookData.itemStack == ItemStack.EMPTY || currentBookData.slotId!=optionalInt.getAsInt() || currentBookData.pos != pos){
-            ClientPlayNetworking.send(new BookShelfInventoryRequestPayload(pos, optionalInt.getAsInt()));
+
+        int temp = BookshelfinspectorClient.bookShelfData.currentSlotInt;
+        final int slotNum = optionalInt.getAsInt();
+        BookshelfinspectorClient.bookShelfData.currentSlotInt = slotNum;
+
+        if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !BookshelfinspectorClient.bookShelfData.requestSent){
+            BookshelfinspectorClient.bookShelfData.requestSent = true;
+            ClientPlayNetworking.send(new BookShelfInventoryRequestPayload(pos, slotNum));
+        }
+        else {
+            if(temp == slotNum)
+                BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
+            else
+                BookshelfinspectorClient.currentBookData = BookData.empty();
         }
     }
 }
