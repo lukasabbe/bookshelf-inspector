@@ -2,6 +2,8 @@ package me.lukasabbe.bookshelfinspector.util;
 
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.component.DataComponentTypes;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 
+@Environment(EnvType.CLIENT)
 public class HudRenderer {
     public static void hudRender(DrawContext context, MinecraftClient client){
         if(!BookshelfinspectorClient.modAvailable) return;
@@ -41,7 +44,7 @@ public class HudRenderer {
             var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
 
             if(writtenBookContentComponent != null){
-                context.drawCenteredTextWithShadow(client.textRenderer, Text.translatableWithFallback("bookshelfinspector.text.book","by ").append(writtenBookContentComponent.author()), x,y+20, 0xFFFFFFFF);
+                context.drawCenteredTextWithShadow(client.textRenderer, Text.translatable("key.bookshelfinspector.author_text",writtenBookContentComponent.author()), x,y+20, 0xFFFFFFFF);
             }
 
         }

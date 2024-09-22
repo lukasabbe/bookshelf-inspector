@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.item.Items;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class BookshelfinspectorClient implements ClientModInitializer {
