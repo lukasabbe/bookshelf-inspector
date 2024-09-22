@@ -10,7 +10,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChiseledBookshelfBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -41,7 +40,7 @@ public class BookshelfMixin{
 
         if(client.cameraEntity == null || client.player == null) return;
 
-        HitResult hit = client.cameraEntity.raycast(20f,0f,false);
+        HitResult hit = client.cameraEntity.raycast(5f,0f,false);
         final HitResult.Type type = hit.getType();
         if(type != HitResult.Type.BLOCK) return;
         final BlockHitResult blockHitResult = (BlockHitResult) hit;
