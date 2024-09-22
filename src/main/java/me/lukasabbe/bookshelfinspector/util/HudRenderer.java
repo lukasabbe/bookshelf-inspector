@@ -44,7 +44,7 @@ public class HudRenderer {
             var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
 
             if(writtenBookContentComponent != null){
-                context.drawCenteredTextWithShadow(client.textRenderer, Text.translatable("key.bookshelfinspector.author_text",writtenBookContentComponent.author()), x,y+20, 0xFFFFFFFF);
+                context.drawCenteredTextWithShadow(client.textRenderer, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+20, 0xFFFFFFFF);
             }
 
         }
