@@ -11,6 +11,6 @@ The **Chiseled Bookshelf Visualizer** is a Minecraft mod that adds a new gaming 
 The mod works in single player and if you want to play in multiplayer, the mod must also be installed on the server (Fabric server).
 
 ### Info
-    This mod is forked from the original mod by [lukasabbe](https://github.com/lukasabbe/bookshelf-inspector)
+This mod is forked from the original mod by [lukasabbe](https://github.com/lukasabbe/bookshelf-inspector)
 
 [<img src="https://i.imgur.com/RJPr4Ij.png">](https://billing.kinetichosting.net/aff.php?aff=127)

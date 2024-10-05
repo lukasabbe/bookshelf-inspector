@@ -4,6 +4,7 @@ import net.anvian.chiseledbookshelfvisualizer.data.BookData;
 import net.anvian.chiseledbookshelfvisualizer.data.BookShelfData;
 import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryPayload;
 import net.anvian.chiseledbookshelfvisualizer.network.ModCheckPayload;
+import net.anvian.chiseledbookshelfvisualizer.util.KeyInput;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,6 +21,8 @@ public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        KeyInput.register();
+
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID,
                 ((payload, context) ->
                         context.client().execute(() ->{
