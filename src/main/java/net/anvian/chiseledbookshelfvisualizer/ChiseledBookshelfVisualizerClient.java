@@ -1,5 +1,6 @@
 package net.anvian.chiseledbookshelfvisualizer;
 
+import net.anvian.chiseledbookshelfvisualizer.config.ChiseledBookshelfVisualizerConfig;
 import net.anvian.chiseledbookshelfvisualizer.data.BookData;
 import net.anvian.chiseledbookshelfvisualizer.data.BookShelfData;
 import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryPayload;
@@ -19,30 +20,32 @@ public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
     public static BookShelfData bookShelfData = new BookShelfData();
     public static boolean modAvailable = false;
 
+    public static ChiseledBookshelfVisualizerConfig CONFIG;
+
     @Override
     public void onInitializeClient() {
+        CONFIG = ChiseledBookshelfVisualizerConfig.load();
         KeyInput.register();
 
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID,
                 ((payload, context) ->
-                        context.client().execute(() ->{
+                        context.client().execute(() -> {
                             bookShelfData.requestSent = false;
-                            if(payload.itemStack().isOf(Items.AIR)){
+                            if (payload.itemStack().isOf(Items.AIR)) {
                                 bookShelfData.isCurrentBookDataToggled = false;
                                 currentBookData = BookData.empty();
                                 currentBookData.slotId = -2;
-                            }
-                            else{
+                            } else {
                                 bookShelfData.isCurrentBookDataToggled = true;
-                                currentBookData = new BookData(payload.itemStack(),payload.pos(),payload.slotNum());
+                                currentBookData = new BookData(payload.itemStack(), payload.pos(), payload.slotNum());
                             }
                         })));
 
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,
-                (payload, context) -> context.client().execute(() ->{
+                (payload, context) -> context.client().execute(() -> {
                     ChiseledBookshelfVisualizer.LOGGER.info("[bookshelfinspector] Connected to server");
                     modAvailable = true;
                 }));
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->  modAvailable = false);
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> modAvailable = false);
     }
 }

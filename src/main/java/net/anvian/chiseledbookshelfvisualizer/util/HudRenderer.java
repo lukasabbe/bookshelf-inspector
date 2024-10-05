@@ -5,7 +5,9 @@ import net.anvian.chiseledbookshelfvisualizer.data.BookData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
@@ -15,6 +17,7 @@ import net.minecraft.text.Text;
 @Environment(EnvType.CLIENT)
 public class HudRenderer {
     private static boolean renderCrosshair = true;
+    private static float scale = ChiseledBookshelfVisualizerClient.CONFIG.hudScale;
 
     public static void toggleCrosshair() {
         renderCrosshair = !renderCrosshair;
@@ -24,11 +27,17 @@ public class HudRenderer {
         return renderCrosshair;
     }
 
+    public static void updateScale(float newScale) {
+        scale = newScale;
+    }
+
     public static void hudRender(DrawContext context, MinecraftClient client) {
         if (shouldRenderCrosshair()) {
             if (!ChiseledBookshelfVisualizerClient.modAvailable) return;
 
             if (client.options.hudHidden) return;
+
+            if (client.currentScreen != null) return;
 
             if (ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled) {
                 final BookData currentBookData = ChiseledBookshelfVisualizerClient.currentBookData;
@@ -41,24 +50,51 @@ public class HudRenderer {
                 if (itemStack.getRarity().getFormatting().getColorValue() != null) {
                     color = itemStack.getRarity().getFormatting().getColorValue();
                 }
-                context.drawCenteredTextWithShadow(client.textRenderer, itemStack.getName(), x, y + 10, color);
+                // Thanks to justanothercorpusguy on the Fabric project Discord
+                // For explaining matrix scaling for text to multiple people :P
+                context.getMatrices().push();
+                context.getMatrices().scale(scale, scale, 1.0f);
 
-                var storedComponets = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
-                if (storedComponets != null) {
-                    int i = 20;
-                    for (RegistryEntry<Enchantment> enchantment : storedComponets.getEnchantments()) {
-                        context.drawCenteredTextWithShadow(client.textRenderer, enchantment.value().description(), x, y + i, 0xFFFFFFFF);
-                        i += 10;
+                drawScaledCenteredText(context, client.textRenderer, itemStack.getName().getString(), x, y + 10, color, scale);
+
+
+                var storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
+                if (storedComponents != null) {
+                    int i = (int) (20 * (scale > 1 ? scale : 1));
+                    for (RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()) {
+                        drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().getString(), x, y + i, 0xFFCECECE, scale);
+                        i += (int) (10 * (scale > 1 ? scale : 1));
                     }
                 }
 
                 var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
 
                 if (writtenBookContentComponent != null) {
-                    context.drawCenteredTextWithShadow(client.textRenderer, Text.translatable("book.byAuthor", writtenBookContentComponent.author()), x, y + 20, 0xFFFFFFFF);
+                    String authorText = Text.translatable("book.byAuthor", writtenBookContentComponent.author()).getString();
+                    drawScaledCenteredText(context, client.textRenderer, authorText, x, y + 20, 0xFFCECECE, scale);
                 }
-
+                context.getMatrices().pop();
             }
         }
+    }
+
+    private static void drawScaledCenteredText(DrawContext context, TextRenderer textRenderer, String text, int x, int y, int color, float scale) {
+        int textWidth = textRenderer.getWidth(text);
+        float scaledX = x / scale - (textWidth / 2f);
+        float scaledY = y / scale;
+
+        textRenderer.draw(
+                text,
+                scaledX,
+                scaledY,
+                color,
+                true,
+                context.getMatrices().peek().getPositionMatrix(),
+                context.getVertexConsumers(),
+                TextRenderer.TextLayerType.NORMAL,
+                0,
+                LightmapTextureManager.MAX_LIGHT_COORDINATE,
+                false
+        );
     }
 }
