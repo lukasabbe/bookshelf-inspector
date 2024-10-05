@@ -1,4 +1,4 @@
-package me.lukasabbe.bookshelfinspector.mixin;
+package net.anvian.chiseledbookshelfvisualizer.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChiseledBookshelfBlock;

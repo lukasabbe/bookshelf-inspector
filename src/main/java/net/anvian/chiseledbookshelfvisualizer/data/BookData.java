@@ -1,4 +1,4 @@
-package me.lukasabbe.bookshelfinspector.data;
+package net.anvian.chiseledbookshelfvisualizer.data;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

@@ -1,24 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "bookshelfinspector",
+  "id": "chiseled-bookshelf-visualizer",
   "version": "${version}",
-  "name": "Bookshelfinspector",
-  "description": "Inspect any book in a chiseled bookshelf.",
-  "authors": ["Lukasabbe"],
-  "contact": {},
+  "name": "Chiseled Bookshelf Visualizer",
+  "description": "Visually displays the contents of the chiseled Bookshelves.",
+  "authors": [
+    "Lukasabbe"
+  ],
+  "contributors": [
+    "anvian"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/chiseled-bookshelf-visualizer",
+    "sources": "https://github.com/anviaan/Chiseled-Bookshelf-Visualizer",
+    "issues": "https://github.com/anviaan/Chiseled-Bookshelf-Visualizer/issues"
+  },
   "license": "MIT",
-  "icon": "assets/bookshelfinspector/icon.png",
+  "icon": "assets/chiseled-bookshelf-visualizer/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "me.lukasabbe.bookshelfinspector.BookshelfinspectorClient"
+      "net.anvian.chiseledbookshelfvisualizer.ChiseledBookshelfVisualizerClient"
     ],
     "main": [
-      "me.lukasabbe.bookshelfinspector.Bookshelfinspector"
+      "net.anvian.chiseledbookshelfvisualizer.ChiseledBookshelfVisualizer"
     ]
   },
   "mixins": [
-    "bookshelfinspector.mixins.json"
+    "chiseled-bookshelf-visualizer.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

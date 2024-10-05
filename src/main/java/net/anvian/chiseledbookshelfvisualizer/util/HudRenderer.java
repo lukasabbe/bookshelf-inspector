@@ -1,7 +1,7 @@
-package me.lukasabbe.bookshelfinspector.util;
+package net.anvian.chiseledbookshelfvisualizer.util;
 
-import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
-import me.lukasabbe.bookshelfinspector.data.BookData;
+import net.anvian.chiseledbookshelfvisualizer.ChiseledBookshelfVisualizerClient;
+import net.anvian.chiseledbookshelfvisualizer.data.BookData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -15,12 +15,12 @@ import net.minecraft.text.Text;
 @Environment(EnvType.CLIENT)
 public class HudRenderer {
     public static void hudRender(DrawContext context, MinecraftClient client){
-        if(!BookshelfinspectorClient.modAvailable) return;
+        if(!ChiseledBookshelfVisualizerClient.modAvailable) return;
 
         if(client.options.hudHidden) return;
 
-        if(BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled){
-            final BookData currentBookData = BookshelfinspectorClient.currentBookData;
+        if(ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled){
+            final BookData currentBookData = ChiseledBookshelfVisualizerClient.currentBookData;
             int screenWidth = client.getWindow().getScaledWidth();
             int screenHeight = client.getWindow().getScaledHeight();
             int x = screenWidth / 2;

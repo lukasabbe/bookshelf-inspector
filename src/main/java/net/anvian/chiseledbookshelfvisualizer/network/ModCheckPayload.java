@@ -1,4 +1,4 @@
-package me.lukasabbe.bookshelfinspector.network;
+package net.anvian.chiseledbookshelfvisualizer.network;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;

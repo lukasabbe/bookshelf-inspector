@@ -1,8 +1,8 @@
-package me.lukasabbe.bookshelfinspector.mixin;
+package net.anvian.chiseledbookshelfvisualizer.mixin;
 
-import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
-import me.lukasabbe.bookshelfinspector.data.BookData;
-import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryRequestPayload;
+import net.anvian.chiseledbookshelfvisualizer.ChiseledBookshelfVisualizerClient;
+import net.anvian.chiseledbookshelfvisualizer.data.BookData;
+import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryRequestPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChiseledBookshelfBlock;
@@ -36,7 +36,7 @@ public class BookshelfMixin{
 
     @Unique
     public void bookShelfInspect(){
-        if(!BookshelfinspectorClient.modAvailable) return;
+        if(!ChiseledBookshelfVisualizerClient.modAvailable) return;
 
         if(client.cameraEntity == null || client.player == null) return;
 
@@ -48,8 +48,8 @@ public class BookshelfMixin{
 
         Optional<ChiseledBookshelfBlockEntity> optionalChiseledBookshelfBlockEntity = client.player.getWorld().getBlockEntity(pos, BlockEntityType.CHISELED_BOOKSHELF);
         if(optionalChiseledBookshelfBlockEntity.isEmpty()){
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
-            BookshelfinspectorClient.currentBookData = BookData.empty();
+            ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled = false;
+            ChiseledBookshelfVisualizerClient.currentBookData = BookData.empty();
             return;
         }
 
@@ -59,25 +59,25 @@ public class BookshelfMixin{
 
         OptionalInt optionalInt = ((BookshelfInvoker)bookshelfBlock).invokerGetSlotForHitPos(blockHitResult,blockState);
         if(optionalInt.isEmpty()) {
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
+            ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled = false;
             return;
         }
 
-        final BookData currentBookData = BookshelfinspectorClient.currentBookData;
+        final BookData currentBookData = ChiseledBookshelfVisualizerClient.currentBookData;
 
-        int temp = BookshelfinspectorClient.bookShelfData.currentSlotInt;
+        int temp = ChiseledBookshelfVisualizerClient.bookShelfData.currentSlotInt;
         final int slotNum = optionalInt.getAsInt();
-        BookshelfinspectorClient.bookShelfData.currentSlotInt = slotNum;
+        ChiseledBookshelfVisualizerClient.bookShelfData.currentSlotInt = slotNum;
 
-        if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !BookshelfinspectorClient.bookShelfData.requestSent){
-            BookshelfinspectorClient.bookShelfData.requestSent = true;
+        if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !ChiseledBookshelfVisualizerClient.bookShelfData.requestSent){
+            ChiseledBookshelfVisualizerClient.bookShelfData.requestSent = true;
             ClientPlayNetworking.send(new BookShelfInventoryRequestPayload(pos, slotNum));
         }
         else {
             if(temp == slotNum)
-                BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
+                ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
             else
-                BookshelfinspectorClient.currentBookData = BookData.empty();
+                ChiseledBookshelfVisualizerClient.currentBookData = BookData.empty();
         }
     }
 }

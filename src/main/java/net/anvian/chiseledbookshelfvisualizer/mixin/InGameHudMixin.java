@@ -1,7 +1,7 @@
-package me.lukasabbe.bookshelfinspector.mixin;
+package net.anvian.chiseledbookshelfvisualizer.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.lukasabbe.bookshelfinspector.util.HudRenderer;
+import net.anvian.chiseledbookshelfvisualizer.util.HudRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

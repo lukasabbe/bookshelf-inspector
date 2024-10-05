@@ -1,19 +1,18 @@
-package me.lukasabbe.bookshelfinspector;
+package net.anvian.chiseledbookshelfvisualizer;
 
-import me.lukasabbe.bookshelfinspector.data.BookData;
-import me.lukasabbe.bookshelfinspector.data.BookShelfData;
-import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryPayload;
-import me.lukasabbe.bookshelfinspector.network.ModCheckPayload;
+import net.anvian.chiseledbookshelfvisualizer.data.BookData;
+import net.anvian.chiseledbookshelfvisualizer.data.BookShelfData;
+import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryPayload;
+import net.anvian.chiseledbookshelfvisualizer.network.ModCheckPayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.item.Items;
-import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
-public class BookshelfinspectorClient implements ClientModInitializer {
+public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
 
     public static BookData currentBookData = BookData.empty();
     public static BookShelfData bookShelfData = new BookShelfData();
@@ -38,7 +37,7 @@ public class BookshelfinspectorClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,
                 (payload, context) -> context.client().execute(() ->{
-                    Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
+                    ChiseledBookshelfVisualizer.LOGGER.info("[bookshelfinspector] Connected to server");
                     modAvailable = true;
                 }));
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->  modAvailable = false);

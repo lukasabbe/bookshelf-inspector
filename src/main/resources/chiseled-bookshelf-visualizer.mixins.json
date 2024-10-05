@@ -1,14 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.lukasabbe.bookshelfinspector.mixin",
+  "package": "net.anvian.chiseledbookshelfvisualizer.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],
   "client": [
-    "InGameHudMixin",
     "BookshelfInvoker",
-    "BookshelfMixin"
+    "BookshelfMixin",
+    "InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

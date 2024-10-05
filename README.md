@@ -1,36 +1,16 @@
-# Chiseled bookshelf inspector
+# Chiseled Bookshelf Visualizer
 
-Inspect any book in a chiseled bookshelf. 
-If you look at a book in a bookshelf with this mod, you will see what type of book it is and its name!
+The **Chiseled Bookshelf Visualizer** is a Minecraft mod that adds a new gaming experience by providing you with a visual way to identify the contents of the Chiseled Bookshelves.
 
-### Examples: 
+## Highlights:
+- **Intuitive Viewing**: With this mod installed, you will now be able to instantly see the contents of a Chiseled Bookshelf right under your crosshairs. You will no longer have to guess what type of book is in it.
+- **Automatic sorting**: The mod distinguishes between all books (normal books, enchanted books and feathered books), making it even easier to manage your library in the game.
+- **Easy selection**: With clear information about the contents of each shelf, you can quickly select the book you need without having to check each shelf manually.
 
-Enchanted books: 
-![Example 1, with enchanted books](./images/2024-09-20_22.37.28.png)
+## Notice
+The mod works in single player and if you want to play in multiplayer, the mod must also be installed on the server (Fabric server).
 
-Written book:
-![Example 2, with Written book](./images/2024-09-20_22.38.09.png)
+### Info
+    This mod is forked from the original mod by [lukasabbe](https://github.com/lukasabbe/bookshelf-inspector)
 
-Normal book:
-![Example 3. with a normal book](./images/2024-09-20_22.38.19.png)
-
-# Multiplayer
-
-This mod will need to be on the server to work in multiplayer. 
-You don't need the mod to connect to the server. It's totally optional!
-
-# Looking for a server?
-Get BisectHosting and save 25% off for new customers using code Lukas at checkout.
-Thanks for your support — it helps me develop this and other mods I make!
-#ad
-[![Support me](https://www.bisecthosting.com/partners/custom-banners/ca44e941-2306-414c-8c65-7c50bc6fcf48.webp)](https://bisecthosting.com/Lukas)
-
-# Open source
-Nearly all my mods are opensource and under MIT.
-Feel free to use however you want.
-If you want to help the development, check out the [GitHub](https://github.com/lukasabbe/bookshelf-inspector)!
-
-# Inspiration and credit
-- The mod is inspired by [gm4-bookshelf-inspector](https://modrinth.com/datapack/gm4-bookshelf-inspector)
-- Lukasabbe has coded
-- Wikiraze requested it
+[<img src="https://i.imgur.com/RJPr4Ij.png">](https://billing.kinetichosting.net/aff.php?aff=127)

@@ -1,4 +1,4 @@
-package me.lukasabbe.bookshelfinspector.data;
+package net.anvian.chiseledbookshelfvisualizer.data;
 
 public class BookShelfData {
     public boolean isCurrentBookDataToggled = false;
