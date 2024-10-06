@@ -2,5 +2,7 @@
     "key.chiseled-bookshelf-visualizer.category": "Вирізаний візуалізатор книжкової полиці",
     "key.chiseled-bookshelf-visualizer.title": "Увімкнено/вимкнено візуалізатор",
     "key.chiseled-bookshelf-visualizer.enabled": "Візуалізатор виточеної книжкової полиці ввімкнено",
-    "key.chiseled-bookshelf-visualizer.disabled": "Візуалізатор точеної книжкової полиці вимкнено"
+    "key.chiseled-bookshelf-visualizer.disabled": "Візуалізатор точеної книжкової полиці вимкнено",
+    "text.config.chiseled-bookshelf-visualizer-config.title": "Конфігурація візуалізатора точеної книжкової полиці",
+    "text.config.chiseled-bookshelf-visualizer-config.option.scale": "Шкала візуалізатора"
 }

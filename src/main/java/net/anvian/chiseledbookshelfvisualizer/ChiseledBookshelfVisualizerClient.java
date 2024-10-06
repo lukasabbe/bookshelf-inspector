@@ -20,11 +20,10 @@ public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
     public static BookShelfData bookShelfData = new BookShelfData();
     public static boolean modAvailable = false;
 
-    public static ChiseledBookshelfVisualizerConfig CONFIG;
+    public static final ChiseledBookshelfVisualizerConfig CONFIG = ChiseledBookshelfVisualizerConfig.createAndLoad();
 
     @Override
     public void onInitializeClient() {
-        CONFIG = ChiseledBookshelfVisualizerConfig.load();
         KeyInput.register();
 
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID,

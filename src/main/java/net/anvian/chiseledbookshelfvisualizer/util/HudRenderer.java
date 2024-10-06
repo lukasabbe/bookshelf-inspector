@@ -17,7 +17,6 @@ import net.minecraft.text.Text;
 @Environment(EnvType.CLIENT)
 public class HudRenderer {
     private static boolean renderCrosshair = true;
-    private static float scale = ChiseledBookshelfVisualizerClient.CONFIG.hudScale;
 
     public static void toggleCrosshair() {
         renderCrosshair = !renderCrosshair;
@@ -27,11 +26,9 @@ public class HudRenderer {
         return renderCrosshair;
     }
 
-    public static void updateScale(float newScale) {
-        scale = newScale;
-    }
-
     public static void hudRender(DrawContext context, MinecraftClient client) {
+        float scale = (float) ChiseledBookshelfVisualizerClient.CONFIG.scale();
+
         if (shouldRenderCrosshair()) {
             if (!ChiseledBookshelfVisualizerClient.modAvailable) return;
 
@@ -56,7 +53,6 @@ public class HudRenderer {
                 context.getMatrices().scale(scale, scale, 1.0f);
 
                 drawScaledCenteredText(context, client.textRenderer, itemStack.getName().getString(), x, y + 10, color, scale);
-
 
                 var storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
                 if (storedComponents != null) {

@@ -15,6 +15,10 @@ repositories {
         name = "Mod Menu"
         url = "https://maven.terraformersmc.com/"
     }
+    maven {
+        name = "WispForest"
+        url = uri("https://maven.wispforest.io/releases")
+    }
 }
 
 dependencies {
@@ -24,17 +28,18 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    Set<String> apiMudules = [
-            "fabric-api-base",
-            "fabric-networking-api-v1",
-            "fabric-lifecycle-events-v1"
-    ]
+    Set<String> apiMudules = ["fabric-api-base",
+                              "fabric-networking-api-v1",
+                              "fabric-lifecycle-events-v1"]
 
     apiMudules.forEach {
         include(modImplementation(fabricApi.module(it, project.fabric_version)))
     }
 
-    modLocalRuntime("com.terraformersmc:modmenu:11.0.1")
+    modLocalRuntime("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+    annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
+    include "io.wispforest:owo-sentinel:${project.owo_version}"
 }
 
 processResources {

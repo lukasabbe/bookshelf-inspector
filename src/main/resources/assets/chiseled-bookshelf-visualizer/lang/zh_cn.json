@@ -2,5 +2,7 @@
     "key.chiseled-bookshelf-visualizer.category": "凿刻书架可视化工具",
     "key.chiseled-bookshelf-visualizer.title": "启用/禁用可视化工具",
     "key.chiseled-bookshelf-visualizer.enabled": "Chiseled Bookshelf Visualizer 已启用",
-    "key.chiseled-bookshelf-visualizer.disabled": "Chiseled Bookshelf Visualizer 已禁用"
+    "key.chiseled-bookshelf-visualizer.disabled": "Chiseled Bookshelf Visualizer 已禁用",
+    "text.config.chiseled-bookshelf-visualizer-config.title": "Chiseled Bookshelf 可视化工具配置",
+    "text.config.chiseled-bookshelf-visualizer-config.option.scale": "可视化器比例"
 }
