@@ -45,6 +45,9 @@ public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
                     ChiseledBookshelfVisualizer.LOGGER.info("[bookshelfinspector] Connected to server");
                     modAvailable = true;
                 }));
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> modAvailable = false);
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            modAvailable = false;
+            bookShelfData = new BookShelfData();
+        });
     }
 }

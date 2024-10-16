@@ -1,5 +1,6 @@
 package net.anvian.chiseledbookshelfvisualizer;
 
+import io.netty.buffer.Unpooled;
 import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryPayload;
 import net.anvian.chiseledbookshelfvisualizer.network.BookShelfInventoryRequestPayload;
 import net.anvian.chiseledbookshelfvisualizer.network.ModCheckPayload;
@@ -10,6 +11,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +39,7 @@ public class ChiseledBookshelfVisualizer implements ModInitializer {
                 return;
             }
             ServerPlayNetworking.send(context.player(), new BookShelfInventoryPayload(stack, payload.pos(), payload.slotNum()));
+            new RegistryByteBuf(Unpooled.buffer(), DynamicRegistryManager.EMPTY);
         })));
 
         ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> {

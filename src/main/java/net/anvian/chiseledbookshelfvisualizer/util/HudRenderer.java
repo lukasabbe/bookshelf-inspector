@@ -9,6 +9,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -54,11 +55,14 @@ public class HudRenderer {
 
                 drawScaledCenteredText(context, client.textRenderer, itemStack.getName().getString(), x, y + 10, color, scale);
 
-                var storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
+                ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
                 if (storedComponents != null) {
                     int i = (int) (20 * (scale > 1 ? scale : 1));
                     for (RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()) {
-                        drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().getString(), x, y + i, 0xFFCECECE, scale);
+                        String lvl = "";
+                        if (storedComponents.getLevel(enchantment) != 1)
+                            lvl = String.valueOf(storedComponents.getLevel(enchantment));
+                        drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().copy().append(" " + lvl).getString(), x, y + i, 0xFFCECECE, scale);
                         i += (int) (10 * (scale > 1 ? scale : 1));
                     }
                 }
