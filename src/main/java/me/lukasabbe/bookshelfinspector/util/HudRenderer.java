@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -32,11 +33,15 @@ public class HudRenderer {
             }
             context.drawCenteredTextWithShadow(client.textRenderer, itemStack.getName(), x,y+10, color);
 
-            var storedComponets = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
-            if(storedComponets != null){
+            ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
+            if(storedComponents != null){
                 int i = 20;
-                for(RegistryEntry<Enchantment> enchantment : storedComponets.getEnchantments()){
-                    context.drawCenteredTextWithShadow(client.textRenderer, enchantment.value().description(), x,y+i, 0xFFFFFFFF);
+                for(RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()){
+                    String lvl = "";
+                    if(storedComponents.getLevel(enchantment) != 1)
+                        lvl = String.valueOf(storedComponents.getLevel(enchantment));
+
+                    context.drawCenteredTextWithShadow(client.textRenderer, enchantment.value().description().copy().append(" " + lvl), x,y+i, 0xFFFFFFFF);
                     i+=10;
                 }
             }

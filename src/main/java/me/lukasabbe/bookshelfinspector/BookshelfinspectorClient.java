@@ -10,7 +10,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.item.Items;
-import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class BookshelfinspectorClient implements ClientModInitializer {
@@ -41,6 +40,9 @@ public class BookshelfinspectorClient implements ClientModInitializer {
                     Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
                     modAvailable = true;
                 }));
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->  modAvailable = false);
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->  {
+            modAvailable = false;
+            bookShelfData = new BookShelfData();
+        });
     }
 }

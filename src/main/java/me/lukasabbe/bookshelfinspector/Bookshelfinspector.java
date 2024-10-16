@@ -1,5 +1,6 @@
 package me.lukasabbe.bookshelfinspector;
 
+import io.netty.buffer.Unpooled;
 import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryPayload;
 import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryRequestPayload;
 import me.lukasabbe.bookshelfinspector.network.ModCheckPayload;
@@ -10,6 +11,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +40,7 @@ public class Bookshelfinspector implements ModInitializer {
                 return;
             }
             ServerPlayNetworking.send(context.player(), new BookShelfInventoryPayload(stack, payload.pos(), payload.slotNum()));
+            new RegistryByteBuf(Unpooled.buffer(), DynamicRegistryManager.EMPTY);
         })));
 
         ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> {
