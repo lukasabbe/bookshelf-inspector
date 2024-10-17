@@ -42,9 +42,10 @@ public class ChiseledBookshelfVisualizerClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,
                 (payload, context) -> context.client().execute(() -> {
-                    ChiseledBookshelfVisualizer.LOGGER.info("[bookshelfinspector] Connected to server");
+                    ChiseledBookshelfVisualizer.LOGGER.info("[ChiBookshelfVisualizer] Mod is available on server.");
                     modAvailable = true;
                 }));
+
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             modAvailable = false;
             bookShelfData = new BookShelfData();

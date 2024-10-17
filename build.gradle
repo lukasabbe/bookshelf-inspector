@@ -40,6 +40,7 @@ dependencies {
 
     annotationProcessor modImplementation("io.wispforest:owo-lib:${project.owo_version}")
     include "io.wispforest:owo-sentinel:${project.owo_version}"
+    include(implementation('com.github.fracpete:romannumerals4j:0.0.1'))
 }
 
 processResources {

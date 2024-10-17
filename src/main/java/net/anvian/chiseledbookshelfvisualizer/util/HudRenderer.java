@@ -1,5 +1,6 @@
 package net.anvian.chiseledbookshelfvisualizer.util;
 
+import com.github.fracpete.romannumerals4j.RomanNumeralFormat;
 import net.anvian.chiseledbookshelfvisualizer.ChiseledBookshelfVisualizerClient;
 import net.anvian.chiseledbookshelfvisualizer.data.BookData;
 import net.fabricmc.api.EnvType;
@@ -32,9 +33,7 @@ public class HudRenderer {
 
         if (shouldRenderCrosshair()) {
             if (!ChiseledBookshelfVisualizerClient.modAvailable) return;
-
             if (client.options.hudHidden) return;
-
             if (client.currentScreen != null) return;
 
             if (ChiseledBookshelfVisualizerClient.bookShelfData.isCurrentBookDataToggled) {
@@ -45,11 +44,11 @@ public class HudRenderer {
                 int y = screenHeight / 2;
                 final ItemStack itemStack = currentBookData.itemStack;
                 int color = 0xFFFFFFFF;
+
                 if (itemStack.getRarity().getFormatting().getColorValue() != null) {
                     color = itemStack.getRarity().getFormatting().getColorValue();
                 }
-                // Thanks to justanothercorpusguy on the Fabric project Discord
-                // For explaining matrix scaling for text to multiple people :P
+
                 context.getMatrices().push();
                 context.getMatrices().scale(scale, scale, 1.0f);
 
@@ -58,11 +57,13 @@ public class HudRenderer {
                 ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
                 if (storedComponents != null) {
                     int i = (int) (20 * (scale > 1 ? scale : 1));
+
                     for (RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()) {
-                        String lvl = "";
                         if (storedComponents.getLevel(enchantment) != 1)
-                            lvl = String.valueOf(storedComponents.getLevel(enchantment));
-                        drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().copy().append(" " + lvl).getString(), x, y + i, 0xFFCECECE, scale);
+                            drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().copy().append(" " + new RomanNumeralFormat().format(storedComponents.getLevel(enchantment))).getString(), x, y + i, 0xFFCECECE, scale);
+                        else
+                            drawScaledCenteredText(context, client.textRenderer, enchantment.value().description().getString(), x, y + i, 0xFFCECECE, scale);
+
                         i += (int) (10 * (scale > 1 ? scale : 1));
                     }
                 }
