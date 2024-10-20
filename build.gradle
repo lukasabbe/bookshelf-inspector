@@ -26,7 +26,7 @@ dependencies {
     ]
 
     apiMudules.forEach {
-        include(modImplementation(fabricApi.module(it,project.fabric_version)))
+        modImplementation(fabricApi.module(it,project.fabric_version))
     }
 }
 

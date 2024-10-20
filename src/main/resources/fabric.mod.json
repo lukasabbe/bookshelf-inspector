@@ -22,7 +22,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=1.21.2-alpha.24.38.a",
+    "minecraft": ">=1.21.2-beta.5",
     "fabric-api-base": "*",
     "fabric-networking-api-v1": "*",
     "fabric-lifecycle-events-v1": "*"
