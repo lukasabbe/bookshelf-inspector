@@ -11,7 +11,10 @@ base {
 }
 
 
-repositories {}
+repositories {
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
+}
 
 dependencies {
     // To change the versions see the gradle.properties file
@@ -22,12 +25,18 @@ dependencies {
     Set<String> apiMudules = [
             "fabric-api-base",
             "fabric-networking-api-v1",
-            "fabric-lifecycle-events-v1"
+            "fabric-lifecycle-events-v1",
+            "fabric-resource-loader-v0"
     ]
 
     apiMudules.forEach {
-        include(modImplementation(fabricApi.module(it,project.fabric_version)))
+        modImplementation(fabricApi.module(it,project.fabric_version))
     }
+
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config}"
+    modApi "com.terraformersmc:modmenu:${project.modmenu}"
+
+    include(implementation "org.yaml:snakeyaml:${project.YAML_snake}")
 }
 
 processResources {

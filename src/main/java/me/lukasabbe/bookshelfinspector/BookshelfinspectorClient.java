@@ -1,5 +1,6 @@
 package me.lukasabbe.bookshelfinspector;
 
+import me.lukasabbe.bookshelfinspector.config.Config;
 import me.lukasabbe.bookshelfinspector.data.BookData;
 import me.lukasabbe.bookshelfinspector.data.BookShelfData;
 import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryPayload;
@@ -17,9 +18,11 @@ public class BookshelfinspectorClient implements ClientModInitializer {
     public static BookData currentBookData = BookData.empty();
     public static BookShelfData bookShelfData = new BookShelfData();
     public static boolean modAvailable = false;
+    public static Config config = new Config();
 
     @Override
     public void onInitializeClient() {
+        config.loadConfig();
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID,
                 ((payload, context) ->
                         context.client().execute(() ->{

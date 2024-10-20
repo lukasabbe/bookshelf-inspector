@@ -14,6 +14,9 @@ Written book:
 Normal book:
 ![Example 3. with a normal book](./images/2024-09-20_22.38.19.png)
 
+lectern:
+![Example 4. with a lectern with a book](./images/lectern_support.png)
+
 # Multiplayer
 
 This mod will need to be on the server to work in multiplayer. 
