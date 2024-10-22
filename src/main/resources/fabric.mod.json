@@ -17,7 +17,6 @@
       "me.lukasabbe.bookshelfinspector.Bookshelfinspector"
     ],
     "modmenu": [
-      "me.lukasabbe.bookshelfinspector.config.ModMenu"
     ]
   },
   "mixins": [
@@ -25,7 +24,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=1.21.2-beta.5",
+    "minecraft": ">=1.21.2",
     "fabric-api-base": "*",
     "fabric-networking-api-v1": "*",
     "fabric-lifecycle-events-v1": "*"
