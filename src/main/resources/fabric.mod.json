@@ -17,6 +17,7 @@
       "me.lukasabbe.bookshelfinspector.Bookshelfinspector"
     ],
     "modmenu": [
+      "me.lukasabbe.bookshelfinspector.config.ModMenu"
     ]
   },
   "mixins": [
