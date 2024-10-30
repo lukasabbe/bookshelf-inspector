@@ -1,5 +1,6 @@
-package me.lukasabbe.bookshelfinspector.network;
+package me.lukasabbe.bookshelfinspector.network.packets;
 
+import me.lukasabbe.bookshelfinspector.network.BookShelfInspectorNetworkConstants;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;

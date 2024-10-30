@@ -2,5 +2,5 @@
   "bookshelfinspector.config.title": "Bookshelf Inspector Config",
   "bookshelfinspector.config.category": "Inställningar",
   "bookshelfinspector.config.lectern.toggle": "Stäng AV eller PÅ läspulpet stöd",
-  "bookshelfinspector.config.lectern.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av läspulpet inspection"
+  "bookshelfinspector.config.lectern.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av läspulpet inspektion"
 }
