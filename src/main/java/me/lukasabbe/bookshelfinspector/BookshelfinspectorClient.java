@@ -3,14 +3,15 @@ package me.lukasabbe.bookshelfinspector;
 import me.lukasabbe.bookshelfinspector.config.Config;
 import me.lukasabbe.bookshelfinspector.data.BookData;
 import me.lukasabbe.bookshelfinspector.data.BookShelfData;
-import me.lukasabbe.bookshelfinspector.network.BookShelfInventoryPayload;
-import me.lukasabbe.bookshelfinspector.network.ModCheckPayload;
+import me.lukasabbe.bookshelfinspector.network.client.BookShelfInventoryHandler;
+import me.lukasabbe.bookshelfinspector.network.client.ModPayloadHandler;
+import me.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryPayload;
+import me.lukasabbe.bookshelfinspector.network.packets.ModCheckPayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.item.Items;
 
 @Environment(EnvType.CLIENT)
 public class BookshelfinspectorClient implements ClientModInitializer {
@@ -23,26 +24,9 @@ public class BookshelfinspectorClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         config.loadConfig();
-        ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID,
-                ((payload, context) ->
-                        context.client().execute(() ->{
-                            bookShelfData.requestSent = false;
-                            if(payload.itemStack().isOf(Items.AIR)){
-                                bookShelfData.isCurrentBookDataToggled = false;
-                                currentBookData = BookData.empty();
-                                currentBookData.slotId = -2;
-                            }
-                            else{
-                                bookShelfData.isCurrentBookDataToggled = true;
-                                currentBookData = new BookData(payload.itemStack(),payload.pos(),payload.slotNum());
-                            }
-                        })));
+        ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID, new BookShelfInventoryHandler());
+        ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,new ModPayloadHandler());
 
-        ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,
-                (payload, context) -> context.client().execute(() ->{
-                    Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
-                    modAvailable = true;
-                }));
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) ->  {
             modAvailable = false;
             bookShelfData = new BookShelfData();
