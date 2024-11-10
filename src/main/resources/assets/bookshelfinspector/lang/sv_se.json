@@ -2,5 +2,7 @@
   "bookshelfinspector.config.title": "Bookshelf Inspector Config",
   "bookshelfinspector.config.category": "Inställningar",
   "bookshelfinspector.config.lectern.toggle": "Stäng AV eller PÅ läspulpet stöd",
-  "bookshelfinspector.config.lectern.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av läspulpet inspektion"
+  "bookshelfinspector.config.lectern.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av läspulpet inspektion",
+  "bookshelfinspector.config.scale": "Ändra storleken på texten igenom att dra på inställningen nedan",
+  "bookshelfinspector.config.scale.tooltip": "Ändra storleken på texten, om du drar den mot 0 så kommer texten bli mindre och om du drar den mot 20 så kommer den bli störe"
 }

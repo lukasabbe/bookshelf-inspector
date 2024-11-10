@@ -26,7 +26,11 @@ public class ModMenu implements ModMenuApi {
                             .startBooleanToggle(Text.translatable("bookshelfinspector.config.lectern.toggle"), BookshelfinspectorClient.config.lecternToggle)
                             .setTooltip(Text.translatable("bookshelfinspector.config.lectern.toggle.tooltip"))
                             .setDefaultValue(true)
-                            .setSaveConsumer(val -> BookshelfinspectorClient.config.lecternToggle = val).build());
+                            .setSaveConsumer(val -> BookshelfinspectorClient.config.lecternToggle = val).build())
+                    .addEntry(entryBuilder
+                            .startIntSlider(Text.translatable("bookshelfinspector.config.scale"),BookshelfinspectorClient.config.scale,0,20)
+                            .setDefaultValue(10).setSaveConsumer(val -> BookshelfinspectorClient.config.scale = val)
+                            .build());
             builder.setSavingRunnable(BookshelfinspectorClient.config::saveConfig);
             return builder.build();
         };
