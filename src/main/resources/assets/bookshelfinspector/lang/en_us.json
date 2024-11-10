@@ -3,6 +3,6 @@
   "bookshelfinspector.config.category": "Settings",
   "bookshelfinspector.config.lectern.toggle": "Turn OFF or ON lectern support",
   "bookshelfinspector.config.lectern.toggle.tooltip": "This will turn OFF/ON the visibility of lectern inspection",
-  "bookshelfinspector.config.scale": "Change the scale of the text by dragging the slider",
-  "bookshelfinspector.config.scale.tooltip": "Change the scale of the text, if you drag it against 0 it will become smaller and if you drag it against 20 it will become bigger"
+  "bookshelfinspector.config.scale": "Change the scale of the text",
+  "bookshelfinspector.config.scale.tooltip": "Change the scale of the text by dragging the slider"
 }

@@ -28,6 +28,7 @@
     "minecraft": ">=1.21.4-alpha.24.44.a",
     "fabric-api-base": "*",
     "fabric-networking-api-v1": "*",
-    "fabric-lifecycle-events-v1": "*"
+    "fabric-lifecycle-events-v1": "*",
+    "fabric-resource-loader-v0": "*"
   }
 }
