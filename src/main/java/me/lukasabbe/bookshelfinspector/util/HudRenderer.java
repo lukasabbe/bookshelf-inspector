@@ -5,7 +5,9 @@ import me.lukasabbe.bookshelfinspector.data.BookData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
@@ -31,27 +33,37 @@ public class HudRenderer {
             if(itemStack.getRarity().getFormatting().getColorValue() != null){
                 color = itemStack.getRarity().getFormatting().getColorValue();
             }
-            context.drawCenteredTextWithShadow(client.textRenderer, itemStack.getName(), x,y+10, color);
+            float scaleFactor = ((float) BookshelfinspectorClient.config.scale /10);
+            drawScaledText(context, itemStack.getName(), x,y+((int)(10*scaleFactor)), color, client.textRenderer);
 
             ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
             if(storedComponents != null){
-                int i = 20;
+                int i = ((int)(20*scaleFactor));
                 for(RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()){
                     String lvl = "";
                     if(storedComponents.getLevel(enchantment) != 1)
                         lvl = String.valueOf(storedComponents.getLevel(enchantment));
 
-                    context.drawCenteredTextWithShadow(client.textRenderer, enchantment.value().description().copy().append(" " + lvl), x,y+i, 0xFFFFFFFF);
-                    i+=10;
+                    drawScaledText(context,enchantment.value().description().copy().append(" " + lvl), x,y+i, 0xFFFFFFFF,client.textRenderer);
+                    i+=(int)(10*scaleFactor);
                 }
             }
 
             var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
 
             if(writtenBookContentComponent != null){
-                context.drawCenteredTextWithShadow(client.textRenderer, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+20, 0xFFFFFFFF);
+                drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
             }
 
         }
+    }
+    private static void drawScaledText(DrawContext context, Text text, int centerX, int y, int color, TextRenderer textRenderer){
+        MatrixStack stack = context.getMatrices();
+        stack.push();
+        stack.translate(centerX,y,0);
+        stack.scale((float) BookshelfinspectorClient.config.scale /10, (float) BookshelfinspectorClient.config.scale /10, (float) BookshelfinspectorClient.config.scale /10);
+        stack.translate(-centerX,-y,0);
+        context.drawCenteredTextWithShadow(textRenderer,text,centerX,y,color);
+        stack.pop();
     }
 }
