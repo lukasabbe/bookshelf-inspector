@@ -13,7 +13,12 @@ import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.EnchantmentTags;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
+import net.minecraft.util.Formatting;
 
 @Environment(EnvType.CLIENT)
 public class HudRenderer {
@@ -30,9 +35,12 @@ public class HudRenderer {
             int y = screenHeight / 2;
             final ItemStack itemStack = currentBookData.itemStack;
             int color = 0xFFFFFFFF;
-            if(itemStack.getRarity().getFormatting().getColorValue() != null){
-                color = itemStack.getRarity().getFormatting().getColorValue();
+
+            final Integer colorValue = itemStack.getRarity().getFormatting().getColorValue();
+            if(colorValue != null){
+                color = colorValue;
             }
+
             float scaleFactor = ((float) BookshelfinspectorClient.config.scale /10);
             drawScaledText(context, itemStack.getName(), x,y+((int)(10*scaleFactor)), color, client.textRenderer);
 
@@ -41,10 +49,14 @@ public class HudRenderer {
                 int i = ((int)(20*scaleFactor));
                 for(RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()){
                     String lvl = "";
-                    if(storedComponents.getLevel(enchantment) != 1)
-                        lvl = String.valueOf(storedComponents.getLevel(enchantment));
-
-                    drawScaledText(context,enchantment.value().description().copy().append(" " + lvl), x,y+i, 0xFFFFFFFF,client.textRenderer);
+                    final int level = storedComponents.getLevel(enchantment);
+                    if(level != 1)
+                        lvl = String.valueOf(level);
+                    final MutableText append = enchantment.value().description().copy().append(" " + lvl);
+                    if(enchantment.isIn(EnchantmentTags.CURSE)) {
+                        Texts.setStyleIfAbsent(append, Style.EMPTY.withColor(Formatting.RED));
+                    }
+                    drawScaledText(context, append, x,y+i, 0xFFFFFFFF,client.textRenderer);
                     i+=(int)(10*scaleFactor);
                 }
             }
@@ -61,7 +73,8 @@ public class HudRenderer {
         MatrixStack stack = context.getMatrices();
         stack.push();
         stack.translate(centerX,y,0);
-        stack.scale((float) BookshelfinspectorClient.config.scale /10, (float) BookshelfinspectorClient.config.scale /10, (float) BookshelfinspectorClient.config.scale /10);
+        final float scale = (float) BookshelfinspectorClient.config.scale / 10;
+        stack.scale(scale, scale, scale);
         stack.translate(-centerX,-y,0);
         context.drawCenteredTextWithShadow(textRenderer,text,centerX,y,color);
         stack.pop();

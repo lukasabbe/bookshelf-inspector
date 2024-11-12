@@ -22,30 +22,32 @@ import net.minecraft.util.math.BlockPos;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+import static me.lukasabbe.bookshelfinspector.BookshelfinspectorClient.*;
+
 @Environment(EnvType.CLIENT)
 public class Inspector {
     public void inspect(MinecraftClient client){
-        if(!BookshelfinspectorClient.modAvailable) return;
+        if(!modAvailable) return;
 
         if(client.cameraEntity == null || client.player == null) return;
 
         HitResult hit = client.cameraEntity.raycast(5f,0f,false);
         final HitResult.Type type = hit.getType();
         if(type != HitResult.Type.BLOCK) {
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
-            BookshelfinspectorClient.currentBookData = BookData.empty();
+            bookShelfData.isCurrentBookDataToggled = false;
+            currentBookData = BookData.empty();
         }
         final BlockHitResult blockHitResult = (BlockHitResult) hit;
         BlockPos pos = blockHitResult.getBlockPos();
         if(client.player.getWorld().getBlockState(pos).isOf(Blocks.CHISELED_BOOKSHELF)){
             bookShelfInspect(pos, blockHitResult, client);
-        }else if(client.player.getWorld().getBlockState(pos).isOf(Blocks.LECTERN) && BookshelfinspectorClient.config.lecternToggle){
+        }else if(client.player.getWorld().getBlockState(pos).isOf(Blocks.LECTERN) && config.lecternToggle){
             lecternInspect(pos, client);
         }else{
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
-            BookshelfinspectorClient.currentBookData = BookData.empty();
-            BookshelfinspectorClient.bookShelfData.latestPos = null;
-            BookshelfinspectorClient.bookShelfData.requestSent = false;
+            bookShelfData.isCurrentBookDataToggled = false;
+            currentBookData = BookData.empty();
+            bookShelfData.latestPos = null;
+            bookShelfData.requestSent = false;
         }
     }
 
@@ -53,19 +55,19 @@ public class Inspector {
     private void lecternInspect(BlockPos pos, MinecraftClient client){
         Optional<LecternBlockEntity> optionalLecternBlockEntity = client.player.getWorld().getBlockEntity(pos, BlockEntityType.LECTERN);
         if(optionalLecternBlockEntity.isEmpty()){
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
-            BookshelfinspectorClient.currentBookData = BookData.empty();
+            bookShelfData.isCurrentBookDataToggled = false;
+            currentBookData = BookData.empty();
             return;
         }
 
-        if(BookshelfinspectorClient.bookShelfData.latestPos != null && BookshelfinspectorClient.bookShelfData.latestPos.equals(pos)){
+        if(bookShelfData.latestPos != null && bookShelfData.latestPos.equals(pos)){
             return;
         }
 
-        if(!BookshelfinspectorClient.bookShelfData.requestSent){
-            BookshelfinspectorClient.bookShelfData.requestSent = true;
+        if(!bookShelfData.requestSent){
+            bookShelfData.requestSent = true;
             ClientPlayNetworking.send(new LecternInventoryRequestPayload(pos));
-            BookshelfinspectorClient.bookShelfData.latestPos = pos;
+            bookShelfData.latestPos = pos;
         }
     }
 
@@ -73,8 +75,8 @@ public class Inspector {
     private void bookShelfInspect(BlockPos pos, BlockHitResult blockHitResult, MinecraftClient client){
         Optional<ChiseledBookshelfBlockEntity> optionalChiseledBookshelfBlockEntity = client.player.getWorld().getBlockEntity(pos, BlockEntityType.CHISELED_BOOKSHELF);
         if(optionalChiseledBookshelfBlockEntity.isEmpty()){
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
-            BookshelfinspectorClient.currentBookData = BookData.empty();
+            bookShelfData.isCurrentBookDataToggled = false;
+            currentBookData = BookData.empty();
             return;
         }
 
@@ -84,25 +86,25 @@ public class Inspector {
 
         OptionalInt optionalInt = ((BookshelfInvoker)bookshelfBlock).invokerGetSlotForHitPos(blockHitResult,blockState);
         if(optionalInt.isEmpty()) {
-            BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
+            bookShelfData.isCurrentBookDataToggled = false;
             return;
         }
 
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
 
-        int temp = BookshelfinspectorClient.bookShelfData.currentSlotInt;
+        int temp = bookShelfData.currentSlotInt;
         final int slotNum = optionalInt.getAsInt();
-        BookshelfinspectorClient.bookShelfData.currentSlotInt = slotNum;
+        bookShelfData.currentSlotInt = slotNum;
 
-        if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !BookshelfinspectorClient.bookShelfData.requestSent){
-            BookshelfinspectorClient.bookShelfData.requestSent = true;
+        if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !bookShelfData.requestSent){
+            bookShelfData.requestSent = true;
             ClientPlayNetworking.send(new BookShelfInventoryRequestPayload(pos, slotNum));
         }
         else {
             if(temp == slotNum)
-                BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
+                bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
             else{
-                BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled = false;
+                bookShelfData.isCurrentBookDataToggled = false;
                 BookshelfinspectorClient.currentBookData = BookData.empty();
             }
         }
