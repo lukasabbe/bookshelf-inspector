@@ -17,6 +17,7 @@ import java.util.Map;
 public class Config {
     public boolean lecternToggle = true;
     public int scale = 10;
+    public boolean useRoman = false;
 
     public void loadConfig(){
         Path configPath = FabricLoader.getInstance().getConfigDir().resolve("bookshelfinspector-config.yml");
@@ -29,6 +30,9 @@ public class Config {
             }
             if(configMap.containsKey("scale")){
                 scale = (int) configMap.get("scale");
+            }
+            if(configMap.containsKey("roman")){
+                useRoman = (boolean) configMap.get("roman");
             }
 
         } catch (FileNotFoundException e) {
@@ -55,6 +59,7 @@ public class Config {
             Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
             configMap.put("lectern-toggle",lecternToggle);
             configMap.put("scale",scale);
+            configMap.put("roman", useRoman);
             FileWriter writer = new FileWriter(configPath.toString());
             yaml.dump(configMap,writer);
             writer.close();

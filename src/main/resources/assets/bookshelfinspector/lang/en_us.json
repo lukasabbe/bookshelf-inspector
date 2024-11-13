@@ -4,5 +4,7 @@
   "bookshelfinspector.config.lectern.toggle": "Turn OFF or ON lectern support",
   "bookshelfinspector.config.lectern.toggle.tooltip": "This will turn OFF/ON the visibility of lectern inspection",
   "bookshelfinspector.config.scale": "Change the scale of the text",
-  "bookshelfinspector.config.scale.tooltip": "Change the scale of the text by dragging the slider"
+  "bookshelfinspector.config.scale.tooltip": "Change the scale of the text by dragging the slider",
+  "bookshelfinspector.config.roman_scale": "Use roman numerals!",
+  "bookshelfinspector.config.roman_scale.tooltip": "Use roman numerals or arabic numerals"
 }

@@ -52,9 +52,15 @@ public class HudRenderer {
                     final int level = storedComponents.getLevel(enchantment);
                     if(level != 1)
                         lvl = String.valueOf(level);
-                    final MutableText append = enchantment.value().description().copy().append(" " + lvl);
+                    final MutableText append;
+                    if(!BookshelfinspectorClient.config.useRoman || level == -1)
+                        append = enchantment.value().description().copy().append(" " + lvl);
+                    else
+                        append = enchantment.value().description().copy().append(" " + RomanNumerals.toRoman(level));
                     if(enchantment.isIn(EnchantmentTags.CURSE)) {
                         Texts.setStyleIfAbsent(append, Style.EMPTY.withColor(Formatting.RED));
+                    }else {
+                        Texts.setStyleIfAbsent(append, Style.EMPTY.withColor(Formatting.GRAY));
                     }
                     drawScaledText(context, append, x,y+i, 0xFFFFFFFF,client.textRenderer);
                     i+=(int)(10*scaleFactor);

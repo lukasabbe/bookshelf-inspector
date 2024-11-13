@@ -31,7 +31,14 @@ public class ModMenu implements ModMenuApi {
                             .startIntSlider(Text.translatable("bookshelfinspector.config.scale"),BookshelfinspectorClient.config.scale,0,20)
                             .setTooltip(Text.translatable("bookshelfinspector.config.scale.tooltip"))
                             .setDefaultValue(10).setSaveConsumer(val -> BookshelfinspectorClient.config.scale = val)
+                            .build())
+                    .addEntry(entryBuilder
+                            .startBooleanToggle(Text.translatable("bookshelfinspector.config.roman_scale"), BookshelfinspectorClient.config.useRoman)
+                            .setTooltip(Text.translatable("bookshelfinspector.config.roman_scale.tooltip"))
+                            .setDefaultValue(false)
+                            .setSaveConsumer(val -> BookshelfinspectorClient.config.useRoman = val)
                             .build());
+
             builder.setSavingRunnable(BookshelfinspectorClient.config::saveConfig);
             return builder.build();
         };
