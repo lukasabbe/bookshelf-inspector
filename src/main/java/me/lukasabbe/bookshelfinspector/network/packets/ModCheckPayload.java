@@ -10,7 +10,7 @@ public record ModCheckPayload(boolean modActivated)  implements CustomPayload {
     public static final CustomPayload.Id<ModCheckPayload> ID = new CustomPayload.Id<>(BookShelfInspectorNetworkConstants.MOD_CHECK_PACKET_ID);
 
     public static final PacketCodec<RegistryByteBuf, ModCheckPayload> CODEC = PacketCodec.tuple(
-            PacketCodecs.BOOL, ModCheckPayload::modActivated,
+            PacketCodecs.BOOLEAN, ModCheckPayload::modActivated,
             ModCheckPayload::new
     );
 
