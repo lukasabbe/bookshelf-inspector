@@ -25,11 +25,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-<<<<<<< HEAD
     "minecraft": "1.21.1",
-=======
-    "minecraft": ">=1.21.1",
->>>>>>> 45244f5 (1.21.1 version)
     "fabric-api-base": "*",
     "fabric-networking-api-v1": "*",
     "fabric-lifecycle-events-v1": "*",
