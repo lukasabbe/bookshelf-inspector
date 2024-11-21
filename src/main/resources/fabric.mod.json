@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "bookshelfinspector",
   "version": "${version}",
-  "name": "Bookshelfinspector",
+  "name": "Bookshelf Inspector",
   "description": "Inspect any book in a chiseled bookshelf.",
   "authors": ["Lukasabbe"],
   "contact": {},
