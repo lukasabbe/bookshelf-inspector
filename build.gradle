@@ -26,7 +26,9 @@ dependencies {
             "fabric-api-base",
             "fabric-networking-api-v1",
             "fabric-lifecycle-events-v1",
-            "fabric-resource-loader-v0"
+            "fabric-resource-loader-v0",
+            "fabric-client-tags-api-v1",
+            "fabric-convention-tags-v2",
     ]
 
     apiMudules.forEach {

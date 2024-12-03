@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "bookshelfinspector",
   "version": "${version}",
-  "name": "Bookshelfinspector",
+  "name": "Bookshelf Inspector",
   "description": "Inspect any book in a chiseled bookshelf.",
   "authors": ["Lukasabbe"],
   "contact": {},
@@ -25,7 +25,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": ">=1.21.3",
+    "minecraft": ">=1.21.4",
     "fabric-api-base": "*",
     "fabric-networking-api-v1": "*",
     "fabric-lifecycle-events-v1": "*",

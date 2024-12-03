@@ -52,17 +52,21 @@ public class HudRenderer {
                     final int level = storedComponents.getLevel(enchantment);
                     if(level != 1)
                         lvl = String.valueOf(level);
-                    final MutableText append;
+                    final MutableText enchantmentText;
+
                     if(!BookshelfinspectorClient.config.useRoman || level == -1)
-                        append = enchantment.value().description().copy().append(" " + lvl);
+                        enchantmentText = enchantment.value().description().copy().append(" " + lvl);
+                    else if (level != 1)
+                        enchantmentText = enchantment.value().description().copy().append(" " + RomanNumerals.toRoman(level));
                     else
-                        append = enchantment.value().description().copy().append(" " + RomanNumerals.toRoman(level));
+                        enchantmentText = enchantment.value().description().copy();
+
                     if(enchantment.isIn(EnchantmentTags.CURSE)) {
-                        Texts.setStyleIfAbsent(append, Style.EMPTY.withColor(Formatting.RED));
+                        Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.RED));
                     }else {
-                        Texts.setStyleIfAbsent(append, Style.EMPTY.withColor(Formatting.GRAY));
+                        Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.GRAY));
                     }
-                    drawScaledText(context, append, x,y+i, 0xFFFFFFFF,client.textRenderer);
+                    drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF,client.textRenderer);
                     i+=(int)(10*scaleFactor);
                 }
             }

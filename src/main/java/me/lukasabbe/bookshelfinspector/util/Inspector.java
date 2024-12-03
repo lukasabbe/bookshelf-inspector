@@ -8,17 +8,16 @@ import me.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPa
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChiseledBookshelfBlock;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.Optional;
 import java.util.OptionalInt;
 
 import static me.lukasabbe.bookshelfinspector.BookshelfinspectorClient.*;
@@ -52,6 +51,7 @@ public class Inspector {
             currentBookData = BookData.empty();
         }
         bookShelfData.latestPos = pos;
+
 
         if(client.player.getWorld().getBlockState(pos).isOf(Blocks.CHISELED_BOOKSHELF)){
             bookShelfInspect(pos, blockHitResult, client);
