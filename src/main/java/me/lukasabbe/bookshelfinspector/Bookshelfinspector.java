@@ -7,7 +7,6 @@ import me.lukasabbe.bookshelfinspector.network.packets.ModCheckPayload;
 import me.lukasabbe.bookshelfinspector.network.server.BookShelfInventoryRequestPayloadHandler;
 import me.lukasabbe.bookshelfinspector.network.server.LecternInventoryRequestPayloadHandler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;

@@ -2,16 +2,17 @@ package me.lukasabbe.bookshelfinspector.network.client;
 
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
-import me.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryPayload;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Items;
 
 @Environment(EnvType.CLIENT)
-public class BookShelfInventoryHandler implements ClientPlayNetworking.PlayPayloadHandler<BookShelfInventoryPayload> {
+public class BookShelfInventoryHandler implements ClientPlayNetworking.PlayPacketHandler<BookShelfInventoryHandler>{
     @Override
-    public void receive(BookShelfInventoryPayload bookShelfInventoryPayload, ClientPlayNetworking.Context context) {
+    public void receive(BookShelfInventoryHandler bookShelfInventoryHandler, ClientPlayerEntity clientPlayerEntity, PacketSender packetSender) {
         context.client().execute(() ->{
             BookshelfinspectorClient.bookShelfData.requestSent = false;
             if(bookShelfInventoryPayload.itemStack().isOf(Items.AIR)){
