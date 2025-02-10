@@ -15,12 +15,14 @@ public class BookshelfTools {
         final World world = Bookshelfinspector.serverInstance.getPlayerManager().getPlayer(player.getUuid()).getWorld();
 
         if(world == null) return null;
-        Optional<ChiseledBookshelfBlockEntity> blockEntityOptional = world.getBlockEntity(pos,BlockEntityType.CHISELED_BOOKSHELF);
+
+        final Optional<ChiseledBookshelfBlockEntity> blockEntityOptional = world.getBlockEntity(pos,BlockEntityType.CHISELED_BOOKSHELF);
+
         if(blockEntityOptional.isEmpty()) return null;
 
-        ChiseledBookshelfBlockEntity blockEntity = blockEntityOptional.get();
-
+        final ChiseledBookshelfBlockEntity blockEntity = blockEntityOptional.get();
         final ItemStack stack = blockEntity.getStack(slotNum);
+
         if(stack.isEmpty()) return null;
 
         return stack;

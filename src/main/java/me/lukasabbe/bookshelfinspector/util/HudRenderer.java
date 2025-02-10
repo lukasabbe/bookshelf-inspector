@@ -24,60 +24,60 @@ import net.minecraft.util.Formatting;
 public class HudRenderer {
     public static void hudRender(DrawContext context, MinecraftClient client){
         if(!BookshelfinspectorClient.modAvailable) return;
-
         if(client.options.hudHidden) return;
+        if(!BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
-        if(BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled){
-            final BookData currentBookData = BookshelfinspectorClient.currentBookData;
-            int screenWidth = client.getWindow().getScaledWidth();
-            int screenHeight = client.getWindow().getScaledHeight();
-            int x = screenWidth / 2;
-            int y = screenHeight / 2;
-            final ItemStack itemStack = currentBookData.itemStack;
-            int color = 0xFFFFFFFF;
+        final BookData currentBookData = BookshelfinspectorClient.currentBookData;
+        final int screenWidth = client.getWindow().getScaledWidth();
+        final int screenHeight = client.getWindow().getScaledHeight();
+        final int x = screenWidth / 2;
+        final int y = screenHeight / 2;
+        final ItemStack itemStack = currentBookData.itemStack;
 
-            final Integer colorValue = itemStack.getRarity().getFormatting().getColorValue();
-            if(colorValue != null){
-                color = colorValue;
-            }
+        int color = 0xFFFFFFFF;
 
-            float scaleFactor = ((float) BookshelfinspectorClient.config.scale /10);
-            drawScaledText(context, itemStack.getName(), x,y+((int)(10*scaleFactor)), color, client.textRenderer);
+        final Integer colorValue = itemStack.getRarity().getFormatting().getColorValue();
 
-            ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
-            if(storedComponents != null){
-                int i = ((int)(20*scaleFactor));
-                for(RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()){
-                    String lvl = "";
-                    final int level = storedComponents.getLevel(enchantment);
-                    if(level != 1)
-                        lvl = String.valueOf(level);
-                    final MutableText enchantmentText;
-
-                    if(!BookshelfinspectorClient.config.useRoman || level == -1)
-                        enchantmentText = enchantment.value().description().copy().append(" " + lvl);
-                    else if (level != 1)
-                        enchantmentText = enchantment.value().description().copy().append(" " + RomanNumerals.toRoman(level));
-                    else
-                        enchantmentText = enchantment.value().description().copy();
-
-                    if(enchantment.isIn(EnchantmentTags.CURSE)) {
-                        Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.RED));
-                    }else {
-                        Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.GRAY));
-                    }
-                    drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF,client.textRenderer);
-                    i+=(int)(10*scaleFactor);
-                }
-            }
-
-            var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
-
-            if(writtenBookContentComponent != null){
-                drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
-            }
-
+        if(colorValue != null){
+            color = colorValue;
         }
+
+        float scaleFactor = ((float) BookshelfinspectorClient.config.scale /10);
+        drawScaledText(context, itemStack.getName(), x,y+((int)(10*scaleFactor)), color, client.textRenderer);
+
+        ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
+        if(storedComponents != null){
+            int i = ((int)(20*scaleFactor));
+            for(RegistryEntry<Enchantment> enchantment : storedComponents.getEnchantments()){
+                String lvl = "";
+                final int level = storedComponents.getLevel(enchantment);
+                if(level != 1)
+                    lvl = String.valueOf(level);
+                final MutableText enchantmentText;
+
+                if(!BookshelfinspectorClient.config.useRoman || level == -1)
+                    enchantmentText = enchantment.value().description().copy().append(" " + lvl);
+                else if (level != 1)
+                    enchantmentText = enchantment.value().description().copy().append(" " + RomanNumerals.toRoman(level));
+                else
+                    enchantmentText = enchantment.value().description().copy();
+
+                if(enchantment.isIn(EnchantmentTags.CURSE)) {
+                    Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.RED));
+                }else {
+                    Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.GRAY));
+                }
+                drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF,client.textRenderer);
+                i+=(int)(10*scaleFactor);
+            }
+        }
+
+        var writtenBookContentComponent = itemStack.getComponents().get(DataComponentTypes.WRITTEN_BOOK_CONTENT);
+
+        if(writtenBookContentComponent != null){
+            drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
+        }
+
     }
     private static void drawScaledText(DrawContext context, Text text, int centerX, int y, int color, TextRenderer textRenderer){
         MatrixStack stack = context.getMatrices();

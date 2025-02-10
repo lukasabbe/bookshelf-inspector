@@ -22,13 +22,13 @@ public class Bookshelfinspector implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        //Registers request types
         PayloadTypeRegistry.playC2S().register(BookShelfInventoryRequestPayload.ID,BookShelfInventoryRequestPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(LecternInventoryRequestPayload.ID, LecternInventoryRequestPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(BookShelfInventoryPayload.ID,BookShelfInventoryPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ModCheckPayload.ID, ModCheckPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(BookShelfInventoryRequestPayload.ID, new BookShelfInventoryRequestPayloadHandler());
-
         ServerPlayNetworking.registerGlobalReceiver(LecternInventoryRequestPayload.ID, new LecternInventoryRequestPayloadHandler());
 
         ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> {

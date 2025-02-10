@@ -23,7 +23,9 @@ public class BookshelfinspectorClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
         config.loadConfig();
+
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID, new BookShelfInventoryHandler());
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,new ModPayloadHandler());
 
