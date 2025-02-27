@@ -22,8 +22,6 @@ public class InGameHudMixin {
 
     @Inject(method = "render",at=@At("RETURN"))
     public void render(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci){
-        RenderSystem.enableBlend();
         HudRenderer.hudRender(context, client);
-        RenderSystem.disableBlend();
     }
 }
