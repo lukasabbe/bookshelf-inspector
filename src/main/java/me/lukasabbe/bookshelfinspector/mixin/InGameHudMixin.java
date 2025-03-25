@@ -1,6 +1,5 @@
 package me.lukasabbe.bookshelfinspector.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import me.lukasabbe.bookshelfinspector.util.HudRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,8 +21,6 @@ public class InGameHudMixin {
 
     @Inject(method = "render",at=@At("RETURN"))
     public void render(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci){
-        RenderSystem.enableBlend();
         HudRenderer.hudRender(context, client);
-        RenderSystem.disableBlend();
     }
 }
