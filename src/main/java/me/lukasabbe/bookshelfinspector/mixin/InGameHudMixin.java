@@ -1,6 +1,5 @@
 package me.lukasabbe.bookshelfinspector.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import me.lukasabbe.bookshelfinspector.util.HudRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
