@@ -11,14 +11,14 @@ import java.util.Optional;
 
 public class LecternTools {
     public static ItemStack getItemStack(BlockPos pos, PlayerEntity player){
-        final World world = player.getWorld();
 
+        final World world = player.getWorld();
         if(world == null) return null;
+
         Optional<LecternBlockEntity> blockEntityOptional = world.getBlockEntity(pos, BlockEntityType.LECTERN);
         if(blockEntityOptional.isEmpty()) return null;
 
         LecternBlockEntity lecternBlock = blockEntityOptional.get();
-
         return lecternBlock.getBook();
     }
 }

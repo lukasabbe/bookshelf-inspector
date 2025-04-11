@@ -1,5 +1,6 @@
 package me.lukasabbe.bookshelfinspector.util;
 
+import me.lukasabbe.bookshelfinspector.Bookshelfinspector;
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
 import me.lukasabbe.bookshelfinspector.mixin.BookshelfInvoker;
@@ -8,12 +9,10 @@ import me.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPa
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChiseledBookshelfBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -29,10 +28,10 @@ public class Inspector {
 
         if(client.cameraEntity == null || client.player == null) return;
 
-        //Send raycast max 5 blocks
+        //Send ray-cast max 5 blocks
         HitResult hit = client.cameraEntity.raycast(5f,0f,false);
 
-        //find block hit, if not found block returns
+        //Find block hit, if not found block returns
         final HitResult.Type type = hit.getType();
         if(type != HitResult.Type.BLOCK) {
             resetBookShelfData();
@@ -41,6 +40,7 @@ public class Inspector {
 
         final BlockHitResult blockHitResult = (BlockHitResult) hit;
         BlockPos pos = blockHitResult.getBlockPos();
+
 
         if(bookShelfData.latestPos == null)
             bookShelfData.latestPos = pos;

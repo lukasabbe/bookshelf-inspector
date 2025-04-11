@@ -4,7 +4,9 @@ import java.util.TreeMap;
 
 //https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
 public class RomanNumerals {
+
     private final static TreeMap<Integer, String> map = new TreeMap<>();
+
     static {
         map.put(1000, "M");
         map.put(900, "CM");
@@ -20,7 +22,6 @@ public class RomanNumerals {
         map.put(4, "IV");
         map.put(1, "I");
     }
-
 
     public static String toRoman(int number){
         int key = map.floorKey(number);

@@ -26,6 +26,7 @@ public class BookshelfinspectorClient implements ClientModInitializer {
 
         config.loadConfig();
 
+        //Registers server-to-client receivers
         ClientPlayNetworking.registerGlobalReceiver(BookShelfInventoryPayload.ID, new BookShelfInventoryHandler());
         ClientPlayNetworking.registerGlobalReceiver(ModCheckPayload.ID,new ModPayloadHandler());
 
