@@ -1,5 +1,6 @@
 package me.lukasabbe.bookshelfinspector.util;
 
+import me.lukasabbe.bookshelfinspector.Bookshelfinspector;
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
 import me.lukasabbe.bookshelfinspector.data.Tags;
@@ -28,10 +29,10 @@ public class Inspector {
 
         if(client.cameraEntity == null || client.player == null) return;
 
-        //Send raycast max 5 blocks
+        //Send ray-cast max 5 blocks
         HitResult hit = client.cameraEntity.raycast(5f,0f,false);
 
-        //find block hit, if not found block returns
+        //Find block hit, if not found block returns
         final HitResult.Type type = hit.getType();
         if(type != HitResult.Type.BLOCK) {
             resetBookShelfData();
@@ -40,6 +41,7 @@ public class Inspector {
 
         final BlockHitResult blockHitResult = (BlockHitResult) hit;
         BlockPos pos = blockHitResult.getBlockPos();
+
 
         if(bookShelfData.latestPos == null)
             bookShelfData.latestPos = pos;

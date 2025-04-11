@@ -11,7 +11,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 public class ModPayloadHandler implements ClientPlayNetworking.PlayPayloadHandler<ModCheckPayload> {
     @Override
     public void receive(ModCheckPayload modCheckPayload, ClientPlayNetworking.Context context) {
-        context.client().execute(() ->{
+        context.client().execute(() -> {
             Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
             BookshelfinspectorClient.modAvailable = true;
         });

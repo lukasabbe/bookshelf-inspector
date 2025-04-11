@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.GuiLayer;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
@@ -19,6 +19,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
+import org.joml.Matrix3x2fStack;
 
 @Environment(EnvType.CLIENT)
 public class HudRenderer {
@@ -27,6 +28,7 @@ public class HudRenderer {
         if(client.options.hudHidden) return;
         if(!BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
+        context.pushGuiLayer(GuiLayer.HUD);
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
         final int screenWidth = client.getWindow().getScaledWidth();
         final int screenHeight = client.getWindow().getScaledHeight();
@@ -78,15 +80,17 @@ public class HudRenderer {
             drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
         }
 
+        context.popGuiLayer();
+
     }
     private static void drawScaledText(DrawContext context, Text text, int centerX, int y, int color, TextRenderer textRenderer){
-        MatrixStack stack = context.getMatrices();
-        stack.push();
-        stack.translate(centerX,y,0);
+        Matrix3x2fStack stack = context.getMatrices();
+        stack.pushMatrix();
+        stack.translate(centerX,y);
         final float scale = (float) BookshelfinspectorClient.config.scale / 10;
-        stack.scale(scale, scale, scale);
-        stack.translate(-centerX,-y,0);
+        stack.scale(scale, scale);
+        stack.translate(-centerX,-y);
         context.drawCenteredTextWithShadow(textRenderer,text,centerX,y,color);
-        stack.pop();
+        stack.popMatrix();
     }
 }
