@@ -3,6 +3,7 @@ package me.lukasabbe.bookshelfinspector.util;
 import me.lukasabbe.bookshelfinspector.Bookshelfinspector;
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
+import me.lukasabbe.bookshelfinspector.data.Tags;
 import me.lukasabbe.bookshelfinspector.mixin.BookshelfInvoker;
 import me.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import me.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
@@ -53,7 +54,7 @@ public class Inspector {
         bookShelfData.latestPos = pos;
 
 
-        if(client.player.getWorld().getBlockState(pos).isOf(Blocks.CHISELED_BOOKSHELF)){
+        if(client.player.getWorld().getBlockState(pos).isIn(Tags.CHISELED_BOOKSHELVES)){
             bookShelfInspect(pos, blockHitResult, client);
         }else if(client.player.getWorld().getBlockState(pos).isOf(Blocks.LECTERN) && config.lecternToggle){
             lecternInspect(pos);
