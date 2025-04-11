@@ -12,7 +12,7 @@ public class ModPayloadHandler implements ClientPlayNetworking.PlayPayloadHandle
     @Override
     public void receive(ModCheckPayload modCheckPayload, ClientPlayNetworking.Context context) {
         context.client().execute(() -> {
-            Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server [{}]", context.client().getServer().getVersion());
+            Bookshelfinspector.LOGGER.info("[bookshelfinspector] Connected to server");
             BookshelfinspectorClient.modAvailable = true;
         });
     }

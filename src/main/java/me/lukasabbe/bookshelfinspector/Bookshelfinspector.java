@@ -35,6 +35,7 @@ public class Bookshelfinspector implements ModInitializer {
         ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> {
             serverInstance = server;
             ServerPlayNetworking.send(handler.player, new ModCheckPayload(true));
+            LOGGER.info("[" + MOD_ID + "] {} has Bookshelf Inspector and is now turned on!", handler.player.getName());
         }));
     }
 }
