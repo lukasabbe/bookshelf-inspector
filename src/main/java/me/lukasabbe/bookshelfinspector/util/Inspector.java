@@ -2,18 +2,17 @@ package me.lukasabbe.bookshelfinspector.util;
 
 import me.lukasabbe.bookshelfinspector.BookshelfinspectorClient;
 import me.lukasabbe.bookshelfinspector.data.BookData;
+import me.lukasabbe.bookshelfinspector.data.Tags;
 import me.lukasabbe.bookshelfinspector.mixin.BookshelfInvoker;
 import me.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import me.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChiseledBookshelfBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -53,7 +52,7 @@ public class Inspector {
         bookShelfData.latestPos = pos;
 
 
-        if(client.player.getWorld().getBlockState(pos).isOf(Blocks.CHISELED_BOOKSHELF)){
+        if(client.player.getWorld().getBlockState(pos).isIn(Tags.CHISELED_BOOKSHELVES)){
             bookShelfInspect(pos, blockHitResult, client);
         }else if(client.player.getWorld().getBlockState(pos).isOf(Blocks.LECTERN) && config.lecternToggle){
             lecternInspect(pos);
