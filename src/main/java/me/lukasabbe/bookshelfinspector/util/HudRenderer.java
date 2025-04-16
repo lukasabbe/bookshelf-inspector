@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.GuiLayer;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
@@ -28,7 +27,6 @@ public class HudRenderer {
         if(client.options.hudHidden) return;
         if(!BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
-        context.pushGuiLayer(GuiLayer.HUD);
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
         final int screenWidth = client.getWindow().getScaledWidth();
         final int screenHeight = client.getWindow().getScaledHeight();
@@ -80,7 +78,6 @@ public class HudRenderer {
             drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
         }
 
-        context.popGuiLayer();
 
     }
     private static void drawScaledText(DrawContext context, Text text, int centerX, int y, int color, TextRenderer textRenderer){
