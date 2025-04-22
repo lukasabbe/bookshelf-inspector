@@ -27,6 +27,7 @@ public class HudRenderer {
         if(client.options.hudHidden) return;
         if(!BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
+
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
         final int screenWidth = client.getWindow().getScaledWidth();
         final int screenHeight = client.getWindow().getScaledHeight();
@@ -77,8 +78,6 @@ public class HudRenderer {
         if(writtenBookContentComponent != null){
             drawScaledText(context, Text.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF,client.textRenderer);
         }
-
-
     }
     private static void drawScaledText(DrawContext context, Text text, int centerX, int y, int color, TextRenderer textRenderer){
         Matrix3x2fStack stack = context.getMatrices();
