@@ -17,6 +17,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
+import net.minecraft.util.ColorCode;
+import net.minecraft.util.Colors;
 import net.minecraft.util.Formatting;
 import org.joml.Matrix3x2fStack;
 
@@ -27,7 +29,6 @@ public class HudRenderer {
         if(client.options.hudHidden) return;
         if(!BookshelfinspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
-
         final BookData currentBookData = BookshelfinspectorClient.currentBookData;
         final int screenWidth = client.getWindow().getScaledWidth();
         final int screenHeight = client.getWindow().getScaledHeight();
@@ -36,14 +37,13 @@ public class HudRenderer {
         final ItemStack itemStack = currentBookData.itemStack;
 
         int color = 0xFFFFFFFF;
-
         final Integer colorValue = itemStack.getRarity().getFormatting().getColorValue();
 
         if(colorValue != null){
-            color = colorValue;
+            color = colorValue + 0xFF000000;
         }
 
-        float scaleFactor = ((float) BookshelfinspectorClient.config.scale /10);
+        float scaleFactor = ((float) BookshelfinspectorClient.config.scale / 10);
         drawScaledText(context, itemStack.getName(), x,y+((int)(10*scaleFactor)), color, client.textRenderer);
 
         ItemEnchantmentsComponent storedComponents = itemStack.getComponents().get(DataComponentTypes.STORED_ENCHANTMENTS);
@@ -68,7 +68,7 @@ public class HudRenderer {
                 }else {
                     Texts.setStyleIfAbsent(enchantmentText, Style.EMPTY.withColor(Formatting.GRAY));
                 }
-                drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF,client.textRenderer);
+                drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF, client.textRenderer);
                 i+=(int)(10*scaleFactor);
             }
         }
