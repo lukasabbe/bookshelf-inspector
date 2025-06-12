@@ -43,4 +43,9 @@ neoForge {
     }
 }
 
+dependencies {
+    jarJar(implementation("org.yaml:snakeyaml")){}
+    additionalRuntimeClasspath "org.yaml:snakeyaml:2.4"
+}
+
 sourceSets.main.resources { srcDir 'src/generated/resources' }

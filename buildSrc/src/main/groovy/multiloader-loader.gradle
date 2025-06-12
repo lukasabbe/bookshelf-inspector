@@ -12,6 +12,7 @@ configurations {
 }
 
 dependencies {
+    implementation("org.yaml:snakeyaml:${project.YAML_snake}")
     compileOnly(project(':common')) {
         capabilities {
             requireCapability "$group:$mod_id"
