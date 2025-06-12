@@ -1,0 +1,38 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://modrinth.com/mod/bookshelf-inspector",
+        "sources": "https://github.com/lukasabbe/bookshelf-inspector"
+    },
+    "license": "${license}",
+    "environment": "*",
+    "icon": "assets/bookshelfinspector/icon.png",
+    "entrypoints": {
+        "main": [
+            "com.lukasabbe.bookshelfinspector.BookshelfInspectorFabric"
+        ],
+        "client": [
+            "com.lukasabbe.bookshelfinspector.BookshelfInspectorFabricClient"
+        ],
+        "modmenu": [
+            "com.lukasabbe.bookshelfinspector.ModMenu"
+        ]
+    },
+    "mixins": [
+        "bookshelfinspector.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "~${minecraft_version}",
+        "java": ">=${java_version}"
+    }
+}
+  
