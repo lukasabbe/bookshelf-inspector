@@ -15,16 +15,6 @@ public class NetworkHandler {
     @SubscribeEvent
     public static void registerPayloads(final RegisterPayloadHandlersEvent event){
         final PayloadRegistrar registrar = event.registrar("1");
-        registrar.playToServer(
-                BookShelfInventoryRequestPayload.ID,
-                BookShelfInventoryRequestPayload.CODEC,
-                ((payload, context) -> BookshelfInspector.networkHandlers.bookShelfInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
-        );
-        registrar.playToServer(
-                LecternInventoryRequestPayload.ID,
-                LecternInventoryRequestPayload.CODEC,
-                ((payload, context) -> BookshelfInspector.networkHandlers.lecternInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
-        );
         registrar.playToClient(
                 BookShelfInventoryPayload.ID,
                 BookShelfInventoryPayload.CODEC,
@@ -34,6 +24,16 @@ public class NetworkHandler {
                 ModCheckPayload.ID,
                 ModCheckPayload.CODEC,
                 ((payload, context) -> BookshelfInspector.networkHandlers.modServerPayloadHandler.receive(payload, (LocalPlayer) context.player()))
+        );
+        registrar.playToServer(
+                BookShelfInventoryRequestPayload.ID,
+                BookShelfInventoryRequestPayload.CODEC,
+                ((payload, context) -> BookshelfInspector.networkHandlers.bookShelfInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
+        );
+        registrar.playToServer(
+                LecternInventoryRequestPayload.ID,
+                LecternInventoryRequestPayload.CODEC,
+                ((payload, context) -> BookshelfInspector.networkHandlers.lecternInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
         );
     }
 

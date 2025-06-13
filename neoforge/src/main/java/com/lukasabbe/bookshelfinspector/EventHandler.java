@@ -14,9 +14,11 @@ public class EventHandler {
     public static List<OnPlayerJoinEvent> playerJoinEvents = new ArrayList<>();
     public static List<OnPlayerDisconnectEvent> playerDisconnectEvents = new ArrayList<>();
 
-    public static void init(){
-        NeoForge.EVENT_BUS.addListener(EventHandler::onJoin);
+    public static void initClient(){
         NeoForge.EVENT_BUS.addListener(EventHandler::onDisconnect);
+    }
+    public static void initServer(){
+        NeoForge.EVENT_BUS.addListener(EventHandler::onJoin);
     }
 
     private static void onJoin(PlayerEvent.PlayerLoggedInEvent event){
