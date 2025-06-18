@@ -22,17 +22,19 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    Set<String> apiMudules = [
+    //modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    Set<String> apiModules = [
             "fabric-api-base",
             "fabric-networking-api-v1",
             "fabric-lifecycle-events-v1",
             "fabric-resource-loader-v0",
-            "fabric-client-tags-api-v1",
+            "fabric-tag-api-v1",
             "fabric-convention-tags-v2",
     ]
 
-    apiMudules.forEach {
-        modImplementation(fabricApi.module(it,project.fabric_version))
+    apiModules.forEach {
+        modImplementation(fabricApi.module(it, project.fabric_version))
     }
 
     modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config}"
