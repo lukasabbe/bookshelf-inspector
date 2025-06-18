@@ -37,8 +37,8 @@ dependencies {
         modImplementation(fabricApi.module(it, project.fabric_version))
     }
 
-    //modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config}"
-    //modApi "com.terraformersmc:modmenu:${project.modmenu}"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config}"
+    modApi "com.terraformersmc:modmenu:${project.modmenu}"
 
     include(implementation "org.yaml:snakeyaml:${project.YAML_snake}")
 }
