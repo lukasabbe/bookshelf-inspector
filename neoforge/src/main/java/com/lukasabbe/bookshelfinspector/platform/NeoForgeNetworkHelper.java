@@ -8,7 +8,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class NeoForgeNetworkHelper implements INetworkHelper {
     @Override
     public void sendPacketFromServer(ServerPlayer player, CustomPacketPayload payload) {
-        PacketDistributor.sendToPlayer(player, payload);
+        try{
+            PacketDistributor.sendToPlayer(player, payload);
+        }catch (Exception ignored) {}
     }
 
     @Override

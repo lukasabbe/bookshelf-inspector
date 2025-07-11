@@ -2,6 +2,7 @@ package com.lukasabbe.bookshelfinspector.util;
 
 import java.util.TreeMap;
 
+//https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
 public class RomanNumerals {
     private final static TreeMap<Integer, String> map = new TreeMap<>();
     static {

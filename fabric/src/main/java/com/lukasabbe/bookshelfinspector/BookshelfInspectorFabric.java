@@ -4,9 +4,6 @@ import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryPayloa
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.ModCheckPayload;
-import com.lukasabbe.bookshelfinspector.network.server.BookShelfInventoryRequestServerPayloadHandler;
-import com.lukasabbe.bookshelfinspector.network.server.LecternInventoryRequestServerPayloadHandler;
-import com.lukasabbe.bookshelfinspector.platform.Services;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
