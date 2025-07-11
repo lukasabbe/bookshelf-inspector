@@ -44,7 +44,7 @@ neoForge {
 }
 
 dependencies {
-    jarJar(implementation("org.yaml:snakeyaml")){}
+    jarJar(implementation("org.yaml:snakeyaml:2.4")){}
     additionalRuntimeClasspath "org.yaml:snakeyaml:2.4"
 }
 

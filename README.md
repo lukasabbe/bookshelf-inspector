@@ -1,32 +1,39 @@
-# MultiLoader Template
+# Chiseled bookshelf inspector
 
-This project provides a Gradle project template that can compile Minecraft mods for multiple modloaders using a common project for the sources. This project does not require any third party libraries or dependencies. If you have any questions or want to discuss the project, please join our [Discord](https://discord.myceliummod.network).
+Inspect any book in a chiseled bookshelf.
+If you look at a book in a bookshelf with this mod, you will see what type of book it is and its name!
 
-## Getting Started
+### Examples:
 
-### IntelliJ IDEA
-This guide will show how to import the MultiLoader Template into IntelliJ IDEA. The setup process is roughly equivalent to setting up the modloaders independently and should be very familiar to anyone who has worked with their MDKs.
+Enchanted books:
+![Example 1, with enchanted books](./images/2024-09-20_22.37.28.png)
 
-1. Clone or download this repository to your computer.
-2. Configure the project by setting the properties in the `gradle.properties` file. You will also need to change the `rootProject.name`  property in `settings.gradle`, this should match the folder name of your project, or else IDEA may complain.
-3. Open the template's root folder as a new project in IDEA. This is the folder that contains this README.md file and the gradlew executable.
-4. If your default JVM/JDK is not Java 21 you will encounter an error when opening the project. This error is fixed by going to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM` and changing the value to a valid Java 21 JVM. You will also need to set the Project SDK to Java 21. This can be done by going to `File > Project Structure > Project SDK`. Once both have been set open the Gradle tab in IDEA and click the refresh button to reload the project.
-5. Open your Run/Debug Configurations. Under the `Application` category there should now be options to run Fabric and NeoForge projects. Select one of the client options and try to run it.
-6. Assuming you were able to run the game in step 5 your workspace should now be set up.
+Written book:
+![Example 2, with Written book](./images/2024-09-20_22.38.09.png)
 
-### Eclipse
-While it is possible to use this template in Eclipse it is not recommended. During the development of this template multiple critical bugs and quirks related to Eclipse were found at nearly every level of the required build tools. While we continue to work with these tools to report and resolve issues support for projects like these are not there yet. For now Eclipse is considered unsupported by this project. The development cycle for build tools is notoriously slow so there are no ETAs available.
+Normal book:
+![Example 3. with a normal book](./images/2024-09-20_22.38.19.png)
 
-## Development Guide
-When using this template the majority of your mod should be developed in the `common` project. The `common` project is compiled against the vanilla game and is used to hold code that is shared between the different loader-specific versions of your mod. The `common` project has no knowledge or access to ModLoader specific code, apis, or concepts. Code that requires something from a specific loader must be done through the project that is specific to that loader, such as the `fabric` or `neoforge` projects.
+lectern:
+![Example 4. with a lectern with a book](./images/lectern_support.png)
 
-Loader specific projects such as the `fabric` and `neoforge` project are used to load the `common` project into the game. These projects also define code that is specific to that loader. Loader specific projects can access all the code in the `common` project. It is important to remember that the `common` project can not access code from loader specific projects.
+# Multiplayer
 
-## Removing Platforms and Loaders
-While this template has support for many modloaders, new loaders may appear in the future, and existing loaders may become less relevant.
+This mod will need to be on the server to work in multiplayer.
+You don't need the mod to connect to the server. It's totally optional!
 
-Removing loader specific projects is as easy as deleting the folder, and removing the `include("projectname")` line from the `settings.gradle` file.
-For example if you wanted to remove support for `forge` you would follow the following steps:
+# Looking for a server?
+Get BisectHosting and save 25% off for new customers using code Lukas at checkout.
+Thanks for your support — it helps me develop this and other mods I make!
+#ad
+[![Support me](https://www.bisecthosting.com/partners/custom-banners/ca44e941-2306-414c-8c65-7c50bc6fcf48.webp)](https://bisecthosting.com/Lukas)
 
-1. Delete the subproject folder. For example, delete `MultiLoader-Template/forge`.
-2. Remove the project from `settings.gradle`. For example, remove `include("forge")`. 
+# Open source
+Nearly all my mods are opensource and under MIT.
+Feel free to use however you want.
+If you want to help the development, check out the [GitHub](https://github.com/lukasabbe/bookshelf-inspector)!
+
+# Inspiration and credit
+- The mod is inspired by [gm4-bookshelf-inspector](https://modrinth.com/datapack/gm4-bookshelf-inspector)
+- Lukasabbe has coded
+- Wikiraze requested it
