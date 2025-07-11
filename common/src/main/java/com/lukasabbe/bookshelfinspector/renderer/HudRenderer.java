@@ -19,6 +19,7 @@ import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import org.joml.Matrix3x2fStack;
 
 public class HudRenderer {
     public static void hudRender(GuiGraphics context, Minecraft client){
@@ -38,7 +39,7 @@ public class HudRenderer {
         final Integer colorValue = itemStack.getRarity().color().getColor();
 
         if(colorValue != null){
-            color = colorValue;
+            color = colorValue + 0xFF000000;
         }
 
         float scaleFactor = ((float) BookshelfInspectorClient.config.scale /10);
@@ -78,13 +79,13 @@ public class HudRenderer {
         }
     }
     private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
-        PoseStack stack = context.pose();
-        stack.pushPose();
-        stack.translate(centerX,y,0);
+        Matrix3x2fStack stack = context.pose();
+        stack.pushMatrix();
+        stack.translate(centerX, y);
         final float scale = (float) BookshelfInspectorClient.config.scale / 10;
-        stack.scale(scale, scale, scale);
-        stack.translate(-centerX,-y,0);
+        stack.scale(scale, scale);
+        stack.translate(-centerX, -y);
         context.drawCenteredString(textRenderer,text,centerX,y,color);
-        stack.popPose();
+        stack.popMatrix();
     }
 }
