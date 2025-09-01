@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lectern",
+    {
+      "id": "securitycraft:reinforced_lectern",
+      "required": false
+    }
+  ]
+}

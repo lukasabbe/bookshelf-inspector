@@ -7,4 +7,5 @@ import net.minecraft.world.level.block.Block;
 
 public class Tags {
     public static final TagKey<Block> CHISELED_BOOKSHELVES = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "chiseled_bookshelves"));
+    public static final TagKey<Block> LECTERNS = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", "lectern"));
 }

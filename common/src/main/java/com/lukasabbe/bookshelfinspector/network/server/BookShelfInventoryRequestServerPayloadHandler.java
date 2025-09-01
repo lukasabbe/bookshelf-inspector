@@ -5,7 +5,7 @@ import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryPayloa
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.platform.Services;
 import com.lukasabbe.bookshelfinspector.platform.handlers.ServerPayloadHandler;
-import com.lukasabbe.bookshelfinspector.util.BookshelfTools;
+import com.lukasabbe.bookshelfinspector.util.BlockTools;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -15,11 +15,13 @@ public class BookShelfInventoryRequestServerPayloadHandler implements ServerPayl
     public void receive(BookShelfInventoryRequestPayload bookShelfInventoryRequestPayload, ServerPlayer player) {
         if(BookshelfInspector.serverInstance == null) return;
 
-        ItemStack stack = BookshelfTools.getItemById(bookShelfInventoryRequestPayload.pos(),bookShelfInventoryRequestPayload.slotNum(), player);
+        ItemStack stack = BlockTools.getBookInChiseledBookShelf(bookShelfInventoryRequestPayload.pos(),bookShelfInventoryRequestPayload.slotNum(), player.level());
+
         if(stack == null){
             Services.NETWORK_HELPER.sendPacketFromServer(player, new BookShelfInventoryPayload(Items.AIR.getDefaultInstance(), bookShelfInventoryRequestPayload.pos(), bookShelfInventoryRequestPayload.slotNum()));
             return;
         }
+
         Services.NETWORK_HELPER.sendPacketFromServer(player, new BookShelfInventoryPayload(stack, bookShelfInventoryRequestPayload.pos(), bookShelfInventoryRequestPayload.slotNum()));
     }
 }

@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:chiseled_bookshelf"
+    "minecraft:chiseled_bookshelf",
+    {
+      "id": "securitycraft:reinforced_chiseled_bookshelf",
+      "required": false
+    }
   ]
 }
