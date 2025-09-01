@@ -25,7 +25,6 @@ public class Inspector {
 
         if(client.cameraEntity == null || client.player == null) return;
 
-        //Send raycast max 5 blocks
         HitResult hit = client.cameraEntity.pick(5f,0f,false);
 
         //find block hit, if not found block returns
@@ -51,7 +50,7 @@ public class Inspector {
 
         if(client.player.level().getBlockState(pos).is(Tags.CHISELED_BOOKSHELVES)){
             bookShelfInspect(pos, blockHitResult, client);
-        }else if(client.player.level().getBlockState(pos).is(Blocks.LECTERN) && config.lecternToggle){
+        }else if(client.player.level().getBlockState(pos).is(Tags.LECTERNS) && config.lecternToggle){
             lecternInspect(pos);
         }else{
 

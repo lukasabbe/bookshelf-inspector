@@ -20,5 +20,4 @@ public class BookshelfInspector {
             Services.NETWORK_HELPER.sendPacketFromServer(player, new ModCheckPayload(true));
         });
     }
-
 }

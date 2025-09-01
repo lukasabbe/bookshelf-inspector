@@ -18,6 +18,5 @@ public class BookshelfInspectorClient {
             modAvailable = false;
             bookShelfData = new BookShelfData();
         });
-
     }
 }
