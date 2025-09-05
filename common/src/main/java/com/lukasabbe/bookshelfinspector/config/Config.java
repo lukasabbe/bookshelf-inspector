@@ -12,11 +12,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+/**
+ * Config class, defines config values.
+ */
 public class Config {
     public boolean lecternToggle = true;
     public int scale = 10;
     public boolean useRoman = false;
 
+    /**
+     * Loads the config file in to mod
+     */
     public void loadConfig(){
         Path configPath = Services.PLATFORM.getConfigPath("bookshelfinspector-config.yml");
         if(!Files.exists(configPath))createConfig(configPath);
@@ -47,6 +53,9 @@ public class Config {
         }
     }
 
+    /**
+     * Saves config settings to config file
+     */
     public void saveConfig(){
         Path configPath = Services.PLATFORM.getConfigPath("bookshelfinspector-config.yml");
         if(!Files.exists(configPath)) createConfig(configPath);
