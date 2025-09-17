@@ -1,6 +1,5 @@
 package com.lukasabbe.bookshelfinspector.mixin;
 
-import com.lukasabbe.bookshelfinspector.Constants;
 import com.lukasabbe.bookshelfinspector.renderer.Inspector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

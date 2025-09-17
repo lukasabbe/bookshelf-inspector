@@ -3,13 +3,11 @@ package com.lukasabbe.bookshelfinspector.renderer;
 import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
 import com.lukasabbe.bookshelfinspector.data.BookData;
 import com.lukasabbe.bookshelfinspector.data.Tags;
-import com.lukasabbe.bookshelfinspector.mixin.BookshelfInvoker;
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.platform.Services;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -23,9 +21,9 @@ public class Inspector {
     public void inspect(Minecraft client){
         if(!modAvailable) return;
 
-        if(client.cameraEntity == null || client.player == null) return;
+        if(client.getCameraEntity() == null || client.player == null) return;
 
-        HitResult hit = client.cameraEntity.pick(5f,0f,false);
+        HitResult hit = client.getCameraEntity().pick(5f,0f,false);
 
         //find block hit, if not found block returns
         final HitResult.Type type = hit.getType();
@@ -81,7 +79,7 @@ public class Inspector {
 
         //Gets index position for a book in the bookshelf
         ChiseledBookShelfBlock bookshelfBlock = (ChiseledBookShelfBlock) blockState.getBlock();
-        OptionalInt optionalInt = ((BookshelfInvoker)bookshelfBlock).invokerGetSlotForHitPos(blockHitResult,blockState);
+        OptionalInt optionalInt = bookshelfBlock.getHitSlot(blockHitResult, blockState.getValue(ChiseledBookShelfBlock.FACING));
 
         //if the position is empty, return
         if(optionalInt.isEmpty()) {

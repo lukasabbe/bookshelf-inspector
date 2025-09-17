@@ -8,8 +8,7 @@
   ],
   "client": [
     "BookshelfMixin",
-    "InGameHudMixin",
-    "BookshelfInvoker"
+    "InGameHudMixin"
   ],
   "server": [],
   "injectors": {
