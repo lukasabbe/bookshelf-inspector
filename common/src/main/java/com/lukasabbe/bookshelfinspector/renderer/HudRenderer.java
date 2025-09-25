@@ -79,13 +79,13 @@ public class HudRenderer {
         }
     }
     private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
-        Matrix3x2fStack stack = context.pose();
-        stack.pushMatrix();
-        stack.translate(centerX, y);
+        PoseStack stack = context.pose();
+        stack.pushPose();
+        stack.translate(centerX, y, 0);
         final float scale = (float) BookshelfInspectorClient.config.scale / 10;
-        stack.scale(scale, scale);
-        stack.translate(-centerX, -y);
+        stack.scale(scale, scale, scale);
+        stack.translate(-centerX, -y, 0);
         context.drawCenteredString(textRenderer,text,centerX,y,color);
-        stack.popMatrix();
+        stack.popPose();
     }
 }
