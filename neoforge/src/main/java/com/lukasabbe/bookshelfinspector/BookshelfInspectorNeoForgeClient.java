@@ -1,5 +1,7 @@
 package com.lukasabbe.bookshelfinspector;
 
+import com.lukasabbe.bookshelfinspector.config.ClothConfigGenerator;
+import com.lukasabbe.bookshelfinspector.util.EventHandler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;

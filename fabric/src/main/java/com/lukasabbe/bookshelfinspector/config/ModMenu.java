@@ -1,3 +1,4 @@
+/*
 package com.lukasabbe.bookshelfinspector;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -40,3 +41,4 @@ public class ModMenu implements ModMenuApi {
         };
     }
 }
+ */
