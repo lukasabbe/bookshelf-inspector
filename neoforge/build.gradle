@@ -18,7 +18,7 @@ neoForge {
         mappingsVersion = parchment_version
     }
     dependencies {
-        api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config}"
+        //api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config}"
     }
 
     runs {

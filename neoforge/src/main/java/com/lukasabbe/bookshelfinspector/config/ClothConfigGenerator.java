@@ -1,3 +1,4 @@
+/*
 package com.lukasabbe.bookshelfinspector.config;
 
 import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
@@ -37,3 +38,4 @@ public class ClothConfigGenerator {
         return builder.build();
     }
 }
+*/

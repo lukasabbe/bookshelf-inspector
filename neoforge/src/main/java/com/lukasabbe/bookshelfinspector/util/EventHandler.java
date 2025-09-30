@@ -20,7 +20,7 @@ public class EventHandler {
     public static void initServer(){ NeoForge.EVENT_BUS.addListener(EventHandler::onJoin); }
 
     private static void onJoin(PlayerEvent.PlayerLoggedInEvent event){
-        playerJoinEvents.forEach(onPlayerJoinEvent -> onPlayerJoinEvent.onPlayerJoin((ServerPlayer) event.getEntity(),event.getEntity().getServer()));
+        playerJoinEvents.forEach(onPlayerJoinEvent -> onPlayerJoinEvent.onPlayerJoin((ServerPlayer) event.getEntity(), ((ServerPlayer)event.getEntity()).level().getServer()));
     }
 
     private static void onDisconnect(ClientPlayerNetworkEvent.LoggingOut event){
