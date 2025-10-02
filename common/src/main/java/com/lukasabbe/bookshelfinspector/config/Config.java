@@ -16,12 +16,21 @@ import java.util.Map;
  * Config class, defines config values.
  */
 public class Config {
+    /**
+     * If lectern's inspection is turned on!
+     */
     public boolean lecternToggle = true;
+    /**
+     * In game size for text
+     */
     public int scale = 10;
+    /**
+     * If enchantments should use roman numerals or normal numbers
+     */
     public boolean useRoman = false;
 
     /**
-     * Loads the config file in to mod
+     * Loads the config into memory
      */
     public void loadConfig(){
         Path configPath = Services.PLATFORM.getConfigPath("bookshelfinspector-config.yml");

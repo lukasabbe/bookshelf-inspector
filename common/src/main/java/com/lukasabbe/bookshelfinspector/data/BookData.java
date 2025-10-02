@@ -7,8 +7,17 @@ import net.minecraft.world.item.ItemStack;
  * Data for a slot in a chiseled bookshelf
  */
 public class BookData {
+    /**
+     * Item in that slot
+     */
     public ItemStack itemStack;
+    /**
+     * Block position for bookshelf
+     */
     public BlockPos pos;
+    /**
+     * Slot were the item is located in
+     */
     public int slotId;
 
     /**
