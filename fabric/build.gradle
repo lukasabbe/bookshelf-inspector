@@ -1,6 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
+    id "com.modrinth.minotaur" version "2.+"
 }
 repositories {
     maven { url "https://maven.shedaniel.me/" }
@@ -42,6 +43,27 @@ loom {
             setConfigName('Fabric Server')
             ideConfigGenerated(true)
             runDir('runs/server')
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "rOrXjyPb" // https://modrinth.com/mod/bookshelf-inspector
+    version = project.version
+    versionType = project.versionType
+    uploadFile = jar
+    gameVersions = [project.minecraft_version]
+    loaders = ["fabric"]
+    if(project.versionType == "beta" || project.versionType == "alpha"){
+        dependencies {
+            required.project "fabric-api"
+        }
+    }else{
+        dependencies {
+            required.project "fabric-api"
+            required.project "cloth-config"
+            required.project "modmenu"
         }
     }
 }
