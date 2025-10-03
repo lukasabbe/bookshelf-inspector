@@ -1,5 +1,7 @@
-package com.lukasabbe.bookshelfinspector;
+/*
+package com.lukasabbe.bookshelfinspector.config;
 
+import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screens.Screen;
@@ -36,3 +38,4 @@ public class ClothConfigGenerator {
         return builder.build();
     }
 }
+*/

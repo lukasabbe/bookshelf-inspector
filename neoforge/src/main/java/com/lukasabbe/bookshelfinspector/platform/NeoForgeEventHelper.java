@@ -1,6 +1,6 @@
 package com.lukasabbe.bookshelfinspector.platform;
 
-import com.lukasabbe.bookshelfinspector.EventHandler;
+import com.lukasabbe.bookshelfinspector.util.EventHandler;
 import com.lukasabbe.bookshelfinspector.platform.handlers.OnPlayerDisconnectEvent;
 import com.lukasabbe.bookshelfinspector.platform.handlers.OnPlayerJoinEvent;
 import com.lukasabbe.bookshelfinspector.platform.services.IEventHelper;
@@ -12,7 +12,5 @@ public class NeoForgeEventHelper implements IEventHelper {
     }
 
     @Override
-    public void registerOnPlayerDisconnect(OnPlayerDisconnectEvent event) {
-        EventHandler.playerDisconnectEvents.add(event);
-    }
+    public void registerOnPlayerDisconnect(OnPlayerDisconnectEvent event) { EventHandler.playerDisconnectEvents.add(event); }
 }
