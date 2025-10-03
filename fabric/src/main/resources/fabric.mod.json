@@ -20,6 +20,9 @@
         ],
         "client": [
             "com.lukasabbe.bookshelfinspector.BookshelfInspectorFabricClient"
+        ],
+        "modmenu": [
+            "com.lukasabbe.bookshelfinspector.config.ModMenu"
         ]
     },
     "mixins": [

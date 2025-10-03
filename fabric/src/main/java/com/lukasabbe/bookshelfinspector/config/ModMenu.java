@@ -1,6 +1,6 @@
-/*
-package com.lukasabbe.bookshelfinspector;
+package com.lukasabbe.bookshelfinspector.config;
 
+import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -41,4 +41,3 @@ public class ModMenu implements ModMenuApi {
         };
     }
 }
- */
