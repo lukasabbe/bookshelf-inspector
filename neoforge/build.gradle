@@ -19,7 +19,7 @@ neoForge {
         mappingsVersion = parchment_version
     }
     dependencies {
-        //api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config}"
+        api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config}"
     }
 
     runs {
@@ -46,7 +46,7 @@ neoForge {
 
 dependencies {
     jarJar(implementation("org.yaml:snakeyaml:2.4")){}
-    additionalRuntimeClasspath "org.yaml:snakeyaml:2.4"
+    runtimeOnly "org.yaml:snakeyaml:2.4"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

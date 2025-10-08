@@ -9,5 +9,5 @@ public interface IPlatformHelper {
 
     Path getConfigPath(String file);
 
-    Path getFileInModContainer(String mod, String fileName);
+    Path getFileOrCopyInModContainer(String mod, String fileName);
 }
