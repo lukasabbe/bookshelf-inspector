@@ -7,7 +7,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
 
+import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class NeoForgePlatformHelper implements IPlatformHelper {
 
@@ -19,14 +21,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isModLoaded(String modId) {
-
         return ModList.get().isLoaded(modId);
-    }
-
-    @Override
-    public boolean isDevelopmentEnvironment() {
-
-        return !FMLLoader.isProduction();
     }
 
     @Override
@@ -35,9 +30,20 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Path getFileInModContainer(String mod, String fileName) {
+    public Path getFileOrCopyInModContainer(String mod, String fileName) {
         if(ModList.get().getModContainerById(mod).isEmpty()) return null;
         ModContainer container = ModList.get().getModContainerById(mod).get();
-        return container.getModInfo().getOwningFile().getFile().findResource(fileName);
+        try {
+            InputStream inputStream = container.getModInfo().getOwningFile().getFile().getContents().get(fileName).open();
+            File targetFile = new File(getConfigPath("bookshelfinspector-config.yml").toUri());
+            try(OutputStream outputStream = new FileOutputStream(targetFile)){
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while((bytesRead = inputStream.read(buffer)) != -1){
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            }catch (IOException ignore){}
+        }catch (IOException ignore){}
+        return null;
     }
 }

@@ -1,6 +1,5 @@
 package com.lukasabbe.bookshelfinspector.mixin;
 
-import com.lukasabbe.bookshelfinspector.Constants;
 import com.lukasabbe.bookshelfinspector.renderer.HudRenderer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;

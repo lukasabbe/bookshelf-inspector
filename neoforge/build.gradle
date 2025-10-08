@@ -1,6 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
+    id "com.modrinth.minotaur" version "2.+"
 }
 repositories {
     maven { url "https://maven.shedaniel.me/" }
@@ -45,7 +46,26 @@ neoForge {
 
 dependencies {
     jarJar(implementation("org.yaml:snakeyaml:2.4")){}
-    additionalRuntimeClasspath "org.yaml:snakeyaml:2.4"
+    runtimeOnly "org.yaml:snakeyaml:2.4"
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "rOrXjyPb" // https://modrinth.com/mod/bookshelf-inspector
+    version = project.version
+    versionType = project.versionType
+    uploadFile = jar
+    gameVersions = [project.minecraft_version]
+    loaders = ["neoforge"]
+    if(project.versionType == "beta" || project.versionType == "alpha"){
+        dependencies {}
+    }else{
+        dependencies {
+            required.project "cloth-config"
+        }
+    }
+}

@@ -1,10 +1,8 @@
 package com.lukasabbe.bookshelfinspector.renderer;
 
 import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
-import com.lukasabbe.bookshelfinspector.Constants;
 import com.lukasabbe.bookshelfinspector.data.BookData;
 import com.lukasabbe.bookshelfinspector.util.RomanNumerals;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

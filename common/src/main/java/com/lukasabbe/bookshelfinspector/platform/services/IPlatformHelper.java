@@ -7,14 +7,7 @@ public interface IPlatformHelper {
 
     boolean isModLoaded(String modId);
 
-    boolean isDevelopmentEnvironment();
-
     Path getConfigPath(String file);
 
-    Path getFileInModContainer(String mod, String fileName);
-
-    default String getEnvironmentName() {
-
-        return isDevelopmentEnvironment() ? "development" : "production";
-    }
+    Path getFileOrCopyInModContainer(String mod, String fileName);
 }

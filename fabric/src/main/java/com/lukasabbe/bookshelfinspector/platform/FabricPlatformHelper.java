@@ -15,14 +15,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isModLoaded(String modId) {
-
         return FabricLoader.getInstance().isModLoaded(modId);
-    }
-
-    @Override
-    public boolean isDevelopmentEnvironment() {
-
-        return FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 
     @Override
@@ -31,7 +24,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public Path getFileInModContainer(String mod, String fileName) {
+    public Path getFileOrCopyInModContainer(String mod, String fileName) {
         if(FabricLoader.getInstance().getModContainer(mod).isEmpty()) return null;
         ModContainer modContainer = FabricLoader.getInstance().getModContainer(mod).get();
         return modContainer.findPath(fileName).orElseThrow();

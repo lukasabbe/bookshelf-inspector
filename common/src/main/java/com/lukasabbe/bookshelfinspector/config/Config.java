@@ -19,7 +19,7 @@ public class Config {
 
     public void loadConfig(){
         Path configPath = Services.PLATFORM.getConfigPath("bookshelfinspector-config.yml");
-        if(!Files.exists(configPath))createConfig(configPath);
+        if(!Files.exists(configPath)) createConfig(configPath);
         Yaml yaml = new Yaml();
         try{
             Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
@@ -39,7 +39,8 @@ public class Config {
     }
 
     private void createConfig(Path configPath){
-        Path defaultConfigPath = Services.PLATFORM.getFileInModContainer("bookshelfinspector", "bookshelfinspector-config.yml");
+        Path defaultConfigPath = Services.PLATFORM.getFileOrCopyInModContainer("bookshelfinspector", "bookshelfinspector-config.yml");
+        if(defaultConfigPath == null) return;
         try {
             Files.copy(defaultConfigPath, configPath);
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package com.lukasabbe.bookshelfinspector;
+package com.lukasabbe.bookshelfinspector.util;
 
 import com.lukasabbe.bookshelfinspector.platform.handlers.OnPlayerDisconnectEvent;
 import com.lukasabbe.bookshelfinspector.platform.handlers.OnPlayerJoinEvent;
@@ -17,12 +17,10 @@ public class EventHandler {
     public static void initClient(){
         NeoForge.EVENT_BUS.addListener(EventHandler::onDisconnect);
     }
-    public static void initServer(){
-        NeoForge.EVENT_BUS.addListener(EventHandler::onJoin);
-    }
+    public static void initServer(){ NeoForge.EVENT_BUS.addListener(EventHandler::onJoin); }
 
     private static void onJoin(PlayerEvent.PlayerLoggedInEvent event){
-        playerJoinEvents.forEach(onPlayerJoinEvent -> onPlayerJoinEvent.onPlayerJoin((ServerPlayer) event.getEntity(),event.getEntity().getServer()));
+        playerJoinEvents.forEach(onPlayerJoinEvent -> onPlayerJoinEvent.onPlayerJoin((ServerPlayer) event.getEntity(), ((ServerPlayer)event.getEntity()).level().getServer()));
     }
 
     private static void onDisconnect(ClientPlayerNetworkEvent.LoggingOut event){
