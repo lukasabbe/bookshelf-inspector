@@ -37,6 +37,9 @@ public class HudRenderer {
         final int y = screenHeight / 2;
         final ItemStack itemStack = currentBookData.itemStack;
 
+        // If item is normal (no enchantments/potion effects/custom names), do not continue if "Display normal items" option is turned off
+        if(BookshelfInspectorClient.bookShelfData.latestBlockState.is(Tags.SHELVES) && ItemTools.isNormalStack(itemStack) && !BookshelfInspectorClient.config.shelfDisplayNormal) return;
+
         int color = 0xFFFFFFFF;
 
         final Integer colorValue = itemStack.getRarity().color().getColor();
@@ -45,27 +48,26 @@ public class HudRenderer {
             color = colorValue + 0xFF000000;
         }
 
+        // Item name
         float scaleFactor = ((float) BookshelfInspectorClient.config.scale /10);
-        if(!BookshelfInspectorClient.bookShelfData.latestBlockState.is(Tags.SHELVES) || BookshelfInspectorClient.config.shelfDisplayNormal || !ItemTools.isNormalStack(itemStack)) {
-            final MutableComponent itemName = itemStack.getHoverName().copy();
+        final MutableComponent itemName = itemStack.getHoverName().copy();
 
-            drawScaledText(context, itemName, x,y+((int)(10*scaleFactor)), color, client.font);
+        drawScaledText(context, itemName, x,y+((int)(10*scaleFactor)), color, client.font);
 
-            // Render item count
-            if (itemStack.isStackable()) {
-                float rightEdge = x + (client.font.width(itemName) / 2f) * scaleFactor;
-                float spacing = 9 * scaleFactor;
-                int nextX = (int) (rightEdge + spacing);
+        // Item count
+        if (itemStack.isStackable()) {
+            float rightEdge = x + (client.font.width(itemName) / 2f) * scaleFactor;
+            float spacing = 9 * scaleFactor;
+            int nextX = (int) (rightEdge + spacing);
 
-                final MutableComponent count = Component.empty();
-                count.append(" (" + itemStack.getCount() + ")");
+            final MutableComponent count = Component.empty();
+            count.append(" (" + itemStack.getCount() + ")");
 
-                ComponentUtils.mergeStyles(count, Style.EMPTY.withColor(ChatFormatting.GRAY));
-                drawScaledText(context, count, nextX,y+((int)(10*scaleFactor)), color, client.font);
-            }
+            ComponentUtils.mergeStyles(count, Style.EMPTY.withColor(ChatFormatting.GRAY));
+            drawScaledText(context, count, nextX,y+((int)(10*scaleFactor)), color, client.font);
         }
 
-        // Render enchantments
+        // Enchantments
         ItemEnchantments itemEnchantments = ItemTools.getItemEnchantments(itemStack);
         if(itemEnchantments != null){
             int i = ((int)(20*scaleFactor));
@@ -93,7 +95,7 @@ public class HudRenderer {
             }
         }
 
-        // Render potion components
+        // Potion components
         PotionContents itemPotionContents = ItemTools.getPotionContents(itemStack);
         if (itemPotionContents != null) {
             int i = ((int)(20*scaleFactor));
@@ -116,12 +118,14 @@ public class HudRenderer {
             }
         }
 
+        // Written book author
         var writtenBookContentComponent = itemStack.getComponents().get(DataComponents.WRITTEN_BOOK_CONTENT);
 
         if(writtenBookContentComponent != null){
             drawScaledText(context, Component.translatable("book.byAuthor",writtenBookContentComponent.author()), x,y+(int)(20*scaleFactor), 0xFFFFFFFF, client.font);
         }
     }
+
     private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
         Matrix3x2fStack stack = context.pose();
         stack.pushMatrix();
