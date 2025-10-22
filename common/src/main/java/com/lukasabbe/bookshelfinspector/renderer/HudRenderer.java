@@ -108,7 +108,7 @@ public class HudRenderer {
                     String amplifierNumeral = BookshelfInspectorClient.config.useRoman ? RomanNumerals.toRoman(amplifier) : String.valueOf(amplifier);
                     potionText.append(" " + amplifierNumeral);
                 }
-                potionText.append(" (" + MobEffectUtil.formatDuration(effect, 1, 20).getString() + ")");
+                potionText.append(" (" + MobEffectUtil.formatDuration(effect, 1, client.level.tickRateManager().tickrate()).getString() + ")");
 
                 if (!effect.getEffect().value().isBeneficial()) {
                     ComponentUtils.mergeStyles(potionText, Style.EMPTY.withColor(ChatFormatting.RED));
