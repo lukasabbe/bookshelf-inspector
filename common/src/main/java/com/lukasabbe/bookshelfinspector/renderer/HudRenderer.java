@@ -104,13 +104,15 @@ public class HudRenderer {
 
                 int amplifier = effect.getAmplifier();
                 potionText = effect.getEffect().value().getDisplayName().copy();
-                if (amplifier > 0)
-                    potionText.append(" " + RomanNumerals.toRoman(amplifier));
+                if (amplifier > 0) {
+                    String amplifierNumeral = BookshelfInspectorClient.config.useRoman ? RomanNumerals.toRoman(amplifier) : String.valueOf(amplifier);
+                    potionText.append(" " + amplifierNumeral);
+                }
                 potionText.append(" (" + MobEffectUtil.formatDuration(effect, 1, 20).getString() + ")");
 
-                if(!effect.getEffect().value().isBeneficial()) {
+                if (!effect.getEffect().value().isBeneficial()) {
                     ComponentUtils.mergeStyles(potionText, Style.EMPTY.withColor(ChatFormatting.RED));
-                }else {
+                } else {
                     ComponentUtils.mergeStyles(potionText, Style.EMPTY.withColor(ChatFormatting.GRAY));
                 }
                 drawScaledText(context, potionText, x, y + i, 0xFFFFFFFF, client.font);
