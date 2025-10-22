@@ -2,6 +2,8 @@ package com.lukasabbe.bookshelfinspector.renderer;
 
 import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
 import com.lukasabbe.bookshelfinspector.data.BookData;
+import com.lukasabbe.bookshelfinspector.data.Tags;
+import com.lukasabbe.bookshelfinspector.util.ItemTools;
 import com.lukasabbe.bookshelfinspector.util.RomanNumerals;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -14,7 +16,10 @@ import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.joml.Matrix3x2fStack;
@@ -41,14 +46,32 @@ public class HudRenderer {
         }
 
         float scaleFactor = ((float) BookshelfInspectorClient.config.scale /10);
-        drawScaledText(context, itemStack.getHoverName(), x,y+((int)(10*scaleFactor)), color, client.font);
+        if(!BookshelfInspectorClient.bookShelfData.latestBlockState.is(Tags.SHELVES) || BookshelfInspectorClient.config.shelfDisplayNormal || !ItemTools.isNormalStack(itemStack)) {
+            final MutableComponent itemName = itemStack.getHoverName().copy();
 
-        ItemEnchantments storedComponents = itemStack.getComponents().get(DataComponents.STORED_ENCHANTMENTS);
-        if(storedComponents != null){
+            drawScaledText(context, itemName, x,y+((int)(10*scaleFactor)), color, client.font);
+
+            // Render item count
+            if (itemStack.isStackable()) {
+                float rightEdge = x + (client.font.width(itemName) / 2f) * scaleFactor;
+                float spacing = 9 * scaleFactor;
+                int nextX = (int) (rightEdge + spacing);
+
+                final MutableComponent count = Component.empty();
+                count.append(" (" + itemStack.getCount() + ")");
+
+                ComponentUtils.mergeStyles(count, Style.EMPTY.withColor(ChatFormatting.GRAY));
+                drawScaledText(context, count, nextX,y+((int)(10*scaleFactor)), color, client.font);
+            }
+        }
+
+        // Render enchantments
+        ItemEnchantments itemEnchantments = ItemTools.getItemEnchantments(itemStack);
+        if(itemEnchantments != null){
             int i = ((int)(20*scaleFactor));
-            for(Holder<Enchantment> enchantment : storedComponents.keySet()){
+            for(Holder<Enchantment> enchantment : itemEnchantments.keySet()){
                 String lvl = "";
-                final int level = storedComponents.getLevel(enchantment);
+                final int level = itemEnchantments.getLevel(enchantment);
                 if(level != 1)
                     lvl = String.valueOf(level);
                 final MutableComponent enchantmentText;
@@ -67,6 +90,29 @@ public class HudRenderer {
                 }
                 drawScaledText(context, enchantmentText, x,y+i, 0xFFFFFFFF,client.font);
                 i+=(int)(10*scaleFactor);
+            }
+        }
+
+        // Render potion components
+        PotionContents itemPotionContents = ItemTools.getPotionContents(itemStack);
+        if (itemPotionContents != null) {
+            int i = ((int)(20*scaleFactor));
+            for (MobEffectInstance effect : itemPotionContents.getAllEffects()) {
+                final MutableComponent potionText;
+
+                int amplifier = effect.getAmplifier();
+                potionText = effect.getEffect().value().getDisplayName().copy();
+                if (amplifier > 0)
+                    potionText.append(" " + RomanNumerals.toRoman(amplifier));
+                potionText.append(" (" + MobEffectUtil.formatDuration(effect, 1, 20).getString() + ")");
+
+                if(!effect.getEffect().value().isBeneficial()) {
+                    ComponentUtils.mergeStyles(potionText, Style.EMPTY.withColor(ChatFormatting.RED));
+                }else {
+                    ComponentUtils.mergeStyles(potionText, Style.EMPTY.withColor(ChatFormatting.GRAY));
+                }
+                drawScaledText(context, potionText, x, y + i, 0xFFFFFFFF, client.font);
+                i += (int) (10 * scaleFactor);
             }
         }
 

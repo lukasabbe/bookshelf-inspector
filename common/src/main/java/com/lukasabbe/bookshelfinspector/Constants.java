@@ -13,4 +13,5 @@ public class Constants {
 	public static final ResourceLocation BOOK_SHELF_INVENTORY_PACKET_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID,"book_shelf_inventory");
 	public static final ResourceLocation MOD_CHECK_PACKET_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID,"mod_check");
 	public static final ResourceLocation LECTERN_INVENTORY_REQUEST_PACKET_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "lectern_inventory_request");
+	public static final ResourceLocation SHELF_INVENTORY_REQUEST_PACKET_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID,"shelf_inventory_request");
 }

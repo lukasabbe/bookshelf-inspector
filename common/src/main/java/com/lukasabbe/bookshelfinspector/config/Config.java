@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class Config {
     public boolean lecternToggle = true;
+    public boolean shelfToggle = true;
+    public boolean shelfDisplayNormal = true;
     public int scale = 10;
     public boolean useRoman = false;
 
@@ -25,6 +27,12 @@ public class Config {
             Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
             if(configMap.containsKey("lectern-toggle")){
                 lecternToggle = (boolean) configMap.get("lectern-toggle");
+            }
+            if(configMap.containsKey("shelf-toggle")){
+                shelfToggle = (boolean) configMap.get("shelf-toggle");
+            }
+            if(configMap.containsKey("shelf-display-normal")){
+                shelfDisplayNormal = (boolean) configMap.get("shelf-display-normal");
             }
             if(configMap.containsKey("scale")){
                 scale = (int) configMap.get("scale");
@@ -55,6 +63,8 @@ public class Config {
         try{
             Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
             configMap.put("lectern-toggle",lecternToggle);
+            configMap.put("shelf-toggle",shelfToggle);
+            configMap.put("shelf-display-normal",shelfDisplayNormal);
             configMap.put("scale",scale);
             configMap.put("roman", useRoman);
             FileWriter writer = new FileWriter(configPath.toString());
