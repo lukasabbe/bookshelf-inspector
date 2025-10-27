@@ -4,6 +4,10 @@
   "bookshelfinspector.config.lectern.toggle": "Stäng AV eller PÅ läspulpet stöd",
   "bookshelfinspector.config.lectern.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av läspulpet inspektion",
   "bookshelfinspector.config.scale": "Ändra storleken på texten",
+  "bookshelfinspector.config.shelf.toggle": "Stäng AV eller PÅ hyllor",
+  "bookshelfinspector.config.shelf.toggle.tooltip": "Denna inställning kommer stänga av eller på synligeten av hyll inspektion",
+  "bookshelfinspector.config.shelf.display.normal": "Stäng AV eller PÅ normala föremåls synlighet i hyllor",
+  "bookshelfinspector.config.shelf.display.normal.tooltip": "Denna inställning kommer stänga av eller på synligeten av normala föremål på hyllor",
   "bookshelfinspector.config.scale.tooltip": "Du kan göra det igenom att dra på den nedan",
   "bookshelfinspector.config.roman_scale": "Använd romerska siffror",
   "bookshelfinspector.config.roman_scale.tooltip": "Använd romerska siffror eller arabiska siffror"
