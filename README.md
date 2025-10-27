@@ -17,6 +17,9 @@ Normal book:
 lectern:
 ![Example 4. with a lectern with a book](./images/lectern_support.png)
 
+Shelf:
+![Example 5, with shelf](./images/2025-10-27_20.59.05.png)
+
 # Multiplayer
 
 This mod will need to be on the server to work in multiplayer.
