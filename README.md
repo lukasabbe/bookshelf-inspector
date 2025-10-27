@@ -40,4 +40,4 @@ If you want to help the development, check out the [GitHub](https://github.com/l
 - The mod is inspired by [gm4-bookshelf-inspector](https://modrinth.com/datapack/gm4-bookshelf-inspector)
 - Lukasabbe has coded
 - Wikiraze requested it
-- (Img00)[https://github.com/img00] made shelf support
+- [Img00](https://github.com/img00) made shelf support
