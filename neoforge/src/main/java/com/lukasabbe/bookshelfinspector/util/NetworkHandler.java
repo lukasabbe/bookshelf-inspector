@@ -5,6 +5,7 @@ import com.lukasabbe.bookshelfinspector.Constants;
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
+import com.lukasabbe.bookshelfinspector.network.packets.ShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.ModCheckPayload;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,6 +37,11 @@ public class NetworkHandler {
                 LecternInventoryRequestPayload.ID,
                 LecternInventoryRequestPayload.CODEC,
                 ((payload, context) -> BookshelfInspector.networkHandlers.lecternInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
+        );
+        registrar.playToServer(
+                ShelfInventoryRequestPayload.ID,
+                ShelfInventoryRequestPayload.CODEC,
+                ((payload, context) -> BookshelfInspector.networkHandlers.shelfInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
         );
     }
 

@@ -5,10 +5,12 @@ import com.lukasabbe.bookshelfinspector.data.BookData;
 import com.lukasabbe.bookshelfinspector.data.Tags;
 import com.lukasabbe.bookshelfinspector.network.packets.BookShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.network.packets.LecternInventoryRequestPayload;
+import com.lukasabbe.bookshelfinspector.network.packets.ShelfInventoryRequestPayload;
 import com.lukasabbe.bookshelfinspector.platform.Services;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
+import net.minecraft.world.level.block.ShelfBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -45,18 +47,28 @@ public class Inspector {
         }
         bookShelfData.latestPos = pos;
 
-
-        if(client.player.level().getBlockState(pos).is(Tags.CHISELED_BOOKSHELVES)){
+        BlockState blockState = client.player.level().getBlockState(pos);
+        bookShelfData.latestBlockState = blockState;
+        if(blockState.is(Tags.CHISELED_BOOKSHELVES)){
             bookShelfInspect(pos, blockHitResult, client);
-        }else if(client.player.level().getBlockState(pos).is(Tags.LECTERNS) && config.lecternToggle){
-            lecternInspect(pos);
-        }else{
-
-            bookShelfData.requestSent = false; // Just for servers that don't have the latest version of mod
-
-            if(!bookShelfData.isCurrentBookDataToggled) return;
-            resetBookShelfData();
+            return;
         }
+
+        if(blockState.is(Tags.LECTERNS) && config.lecternToggle){
+            lecternInspect(pos);
+            return;
+        }
+
+        if(blockState.is(Tags.SHELVES) && config.shelfToggle){
+            shelfInspect(pos, blockHitResult, client);
+            return;
+        }
+
+        // No match
+        bookShelfData.requestSent = false; // Just for servers that don't have the latest version of mod
+
+        if(!bookShelfData.isCurrentBookDataToggled) return;
+        resetBookShelfData();
     }
 
 
@@ -98,6 +110,38 @@ public class Inspector {
         if(currentBookData.slotId!= slotNum && currentBookData.slotId!=-2 && !bookShelfData.requestSent){
             bookShelfData.requestSent = true;
             Services.NETWORK_HELPER.sendPacketFromClient(new BookShelfInventoryRequestPayload(pos, slotNum));
+        }
+        else {
+            if(temp == slotNum)
+                bookShelfData.isCurrentBookDataToggled = currentBookData.slotId != -2;
+            else{
+                bookShelfData.isCurrentBookDataToggled = false;
+                BookshelfInspectorClient.currentBookData = BookData.empty();
+            }
+        }
+    }
+
+    private void shelfInspect(BlockPos pos, BlockHitResult blockHitResult, Minecraft client){
+        final BlockState blockState = client.player.level().getBlockState(pos);
+
+        ShelfBlock shelfBlock = (ShelfBlock) blockState.getBlock();
+        OptionalInt optionalInt = shelfBlock.getHitSlot(blockHitResult, blockState.getValue(ShelfBlock.FACING));
+
+        // If the position is empty, return
+        if (optionalInt.isEmpty()) {
+            resetBookShelfData();
+            return;
+        }
+
+        final BookData currentBookData = BookshelfInspectorClient.currentBookData;
+
+        final int temp = bookShelfData.currentSlotInt;
+        final int slotNum = optionalInt.getAsInt();
+        bookShelfData.currentSlotInt = slotNum;
+
+        if (currentBookData.slotId != slotNum && !bookShelfData.requestSent) {
+            bookShelfData.requestSent = true;
+            Services.NETWORK_HELPER.sendPacketFromClient(new ShelfInventoryRequestPayload(pos, slotNum));
         }
         else {
             if(temp == slotNum)
