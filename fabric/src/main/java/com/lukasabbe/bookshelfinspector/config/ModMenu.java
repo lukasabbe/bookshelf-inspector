@@ -16,7 +16,6 @@ public class ModMenu implements ModMenuApi {
                     .setParentScreen(parent)
                     .setTitle(Component.translatable("bookshelfinspector.config.title"));
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-
             builder
                     .getOrCreateCategory(Component.translatable("bookshelfinspector.config.category"))
                     .addEntry(entryBuilder
