@@ -7,7 +7,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
 public class FabricNetworkHelper implements INetworkHelper {
-
     @Override
     public void sendPacketFromServer(ServerPlayer player, CustomPacketPayload payload) {
         ServerPlayNetworking.send(player, payload);
