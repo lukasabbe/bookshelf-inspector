@@ -14,11 +14,11 @@ public class BookshelfInspectorFabric implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        PayloadTypeRegistry.playC2S().register(BookShelfInventoryRequestPayload.ID, BookShelfInventoryRequestPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(LecternInventoryRequestPayload.ID, LecternInventoryRequestPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(ShelfInventoryRequestPayload.ID, ShelfInventoryRequestPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(BookShelfInventoryPayload.ID, BookShelfInventoryPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(ModCheckPayload.ID, ModCheckPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(BookShelfInventoryRequestPayload.ID, BookShelfInventoryRequestPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(LecternInventoryRequestPayload.ID, LecternInventoryRequestPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(ShelfInventoryRequestPayload.ID, ShelfInventoryRequestPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(BookShelfInventoryPayload.ID, BookShelfInventoryPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ModCheckPayload.ID, ModCheckPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(
                 BookShelfInventoryRequestPayload.ID,

@@ -48,7 +48,7 @@ modrinth {
     projectId = "rOrXjyPb" // https://modrinth.com/mod/bookshelf-inspector
     version = project.version
     versionType = project.versionType
-    //uploadFile = remapJar
+    uploadFile = jar
     gameVersions = [project.minecraft_version]
     loaders = ["fabric"]
     if(project.versionType == "beta" || project.versionType == "alpha"){
