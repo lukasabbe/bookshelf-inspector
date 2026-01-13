@@ -1,6 +1,7 @@
 package com.lukasabbe.bookshelfinspector.renderer;
 
 import com.lukasabbe.bookshelfinspector.BookshelfInspectorClient;
+import com.lukasabbe.bookshelfinspector.Constants;
 import com.lukasabbe.bookshelfinspector.data.BookData;
 import com.lukasabbe.bookshelfinspector.data.Tags;
 import com.lukasabbe.bookshelfinspector.mixin.BookshelfInvoker;
@@ -22,7 +23,6 @@ import static com.lukasabbe.bookshelfinspector.BookshelfInspectorClient.*;
 public class Inspector {
     public void inspect(Minecraft client){
         if(!modAvailable) return;
-
         if(client.cameraEntity == null || client.player == null) return;
 
         HitResult hit = client.cameraEntity.pick(5f,0f,false);
@@ -33,6 +33,7 @@ public class Inspector {
             resetBookShelfData();
             return;
         }
+
 
         final BlockHitResult blockHitResult = (BlockHitResult) hit;
         BlockPos pos = blockHitResult.getBlockPos();
@@ -47,8 +48,11 @@ public class Inspector {
         }
         bookShelfData.latestPos = pos;
 
+        // For plugin
+        boolean isBookShelfBookshelf = client.player.level().getBlockState(pos).is(Blocks.CHISELED_BOOKSHELF);
 
-        if(client.player.level().getBlockState(pos).is(Tags.CHISELED_BOOKSHELVES)){
+        if(client.player.level().getBlockState(pos).is(Tags.CHISELED_BOOKSHELVES) || isBookShelfBookshelf){
+            Constants.LOG.info("[bookshelfinspector] here");
             bookShelfInspect(pos, blockHitResult, client);
         }else if(client.player.level().getBlockState(pos).is(Tags.LECTERNS) && config.lecternToggle){
             lecternInspect(pos);
