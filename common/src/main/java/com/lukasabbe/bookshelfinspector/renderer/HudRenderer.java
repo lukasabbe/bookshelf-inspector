@@ -55,7 +55,7 @@ public class HudRenderer {
         drawScaledText(context, itemName, x,y+((int)(10*scaleFactor)), color, client.font);
 
         // Item count
-        if (itemStack.isStackable()) {
+        if (itemStack.isStackable() && itemStack.getCount() > 1) {
             float rightEdge = x + (client.font.width(itemName) / 2f) * scaleFactor;
             float spacing = 9 * scaleFactor;
             int nextX = (int) (rightEdge + spacing);
