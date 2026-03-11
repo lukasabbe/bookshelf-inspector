@@ -4,7 +4,7 @@ import com.lukasabbe.bookshelfinspector.renderer.HudRenderer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameHudMixin {
     @Shadow @Final private Minecraft minecraft;
 
-    @Inject(method = "render",at=@At("RETURN"))
-    public void render(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci){
-        HudRenderer.hudRender(context, minecraft);
+    @Inject(method = "extractRenderState",at=@At("RETURN"))
+    public void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci){
+        HudRenderer.hudRender(graphics, minecraft);
     }
 }

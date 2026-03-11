@@ -8,7 +8,7 @@ import com.lukasabbe.bookshelfinspector.util.RomanNumerals;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -25,7 +25,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.joml.Matrix3x2fStack;
 
 public class HudRenderer {
-    public static void hudRender(GuiGraphics context, Minecraft client){
+    public static void hudRender(GuiGraphicsExtractor context, Minecraft client){
         if(!BookshelfInspectorClient.modAvailable) return;
         if(client.options.hideGui) return;
         if(!BookshelfInspectorClient.bookShelfData.isCurrentBookDataToggled) return;
@@ -128,14 +128,14 @@ public class HudRenderer {
         }
     }
 
-    private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
+    private static void drawScaledText(GuiGraphicsExtractor context, Component text, int centerX, int y, int color, Font textRenderer){
         Matrix3x2fStack stack = context.pose();
         stack.pushMatrix();
         stack.translate(centerX, y);
         final float scale = (float) BookshelfInspectorClient.config.scale / 10;
         stack.scale(scale, scale);
         stack.translate(-centerX, -y);
-        context.drawCenteredString(textRenderer,text,centerX,y,color);
+        context.centeredText(textRenderer,text,centerX,y,color);
         stack.popMatrix();
     }
 }
