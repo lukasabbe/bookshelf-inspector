@@ -14,10 +14,7 @@ neoForge {
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
     }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
+
     dependencies {
         api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config}"
     }
@@ -29,12 +26,19 @@ neoForge {
         }
         client {
             client()
+            gameDirectory = this.mkdir(this.file("runs/client"))
         }
         data {
             clientData()
+            gameDirectory = this.mkdir(this.file("runs/data"))
+            // DataGen can be run by - "./gradlew :neoforge:runData" in Terminal.
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
         server {
             server()
+            this.file("runs/server").createParentDirectories()
+            gameDirectory = this.mkdir(this.file("runs/server"))
         }
     }
     mods {
@@ -51,21 +55,21 @@ dependencies {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = "rOrXjyPb" // https://modrinth.com/mod/bookshelf-inspector
-    version = project.version
-    versionType = project.versionType
-    uploadFile = jar
-    gameVersions = [project.minecraft_version]
-    loaders = ["neoforge"]
-    if(project.versionType == "beta" || project.versionType == "alpha"){
-        dependencies {}
-    }else{
-        dependencies {
-            required.project "cloth-config"
+// Implement mcgradleconventions loader attribute
+def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
+['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
+    configurations.named("$variant") {
+        attributes {
+            attribute(loaderAttribute, 'neoforge')
+        }
+    }
+}
+sourceSets.configureEach {
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName, it.getTaskName(null, 'jarJar')].each { variant ->
+        configurations.named("$variant") {
+            attributes {
+                attribute(loaderAttribute, 'neoforge')
+            }
         }
     }
 }
