@@ -11,10 +11,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentUtils;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.*;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
@@ -27,7 +24,7 @@ import org.joml.Matrix3x2fStack;
 public class HudRenderer {
     public static void hudRender(GuiGraphicsExtractor context, Minecraft client){
         if(!BookshelfInspectorClient.modAvailable) return;
-        if(client.options.hideGui) return;
+        if(client.gui.hud.isHidden()) return;
         if(!BookshelfInspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
         final BookData currentBookData = BookshelfInspectorClient.currentBookData;
@@ -42,10 +39,11 @@ public class HudRenderer {
 
         int color = 0xFFFFFFFF;
 
-        final Integer colorValue = itemStack.getRarity().color().getColor();
+
+        final TextColor colorValue = TextColor.fromLegacyFormat(itemStack.getRarity().color());
 
         if(colorValue != null){
-            color = colorValue + 0xFF000000;
+            color = colorValue.getValue() + 0xFF000000;
         }
 
         // Item name

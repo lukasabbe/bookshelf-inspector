@@ -1,5 +1,6 @@
 package com.lukasabbe.bookshelfinspector.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.lukasabbe.bookshelfinspector.renderer.HudRenderer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -17,7 +18,7 @@ public class InGameHudMixin {
     @Shadow @Final private Minecraft minecraft;
 
     @Inject(method = "extractRenderState",at=@At("RETURN"))
-    public void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci){
+    public void render(DeltaTracker deltaTracker, boolean shouldRenderLevel, boolean resourcesLoaded, CallbackInfo ci, @Local(name = "graphics") GuiGraphicsExtractor graphics) {
         HudRenderer.hudRender(graphics, minecraft);
     }
 }
