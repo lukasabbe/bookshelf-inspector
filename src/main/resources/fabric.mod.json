@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "Inspect any book in a chiseled bookshelf.",
+  "authors": [
+    "Lukasabbe"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/bookshelf-inspector",
+    "sources": "https://github.com/lukasabbe/bookshelf-inspector"
+  },
+  "license": "MIT",
+  "icon": "assets/bookshelfinspector/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.lukasabbe.entry.BookshelfInspectorFabric"
+    ],
+    "client": [
+      "com.lukasabbe.entry.BookshelfInspectorFabric"
+    ],
+    "modmenu":  [
+      "com.lukasabbe.config.ModMenu"
+    ]
+  },
+  "mixins": [
+    "bookshelfinspector.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.17",
+    "minecraft": "${minecraft}"
+  }
+}

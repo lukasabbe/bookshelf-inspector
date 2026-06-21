@@ -1,0 +1,58 @@
+# See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
+mod.id = "bookshelfinspector"
+mod.name = "Bookshelf Inspector"
+mod.group = "com.lukasabbe"
+mod.version = "2.3"
+
+deps.fabric_loader = "0.19.3"
+loomx.loom_version = "1.17-SNAPSHOT"
+
+deps.yaml = "2.5"
+
+["1.21.1"]
+# List of releases to be marked compatible on Modrinth/Curseforge
+mod.mc_releases = ["1.21", "1.21.1"]
+deps.cloth_config = "15.0.140"
+
+
+[fabric."1.21.1"]
+# Mod compatibility range in fabric.mod.json/neoforge.mods.toml
+mod.mc_compat = ">=1.21 <=1.21.1"
+deps.fabric_api = "0.116.12+1.21.1"
+deps.modmenu = "11.0.4"
+
+
+[neoforge."1.21.1"]
+mod.mc_compat = "[1.21, 1.21.1]"
+deps.neo_loader = "21.1.234"
+
+
+["1.21.11"]
+mod.mc_releases = ["1.21.11"]
+deps.cloth_config = "21.11.153"
+
+
+[fabric."1.21.11"]
+mod.mc_compat = "1.21.11"
+deps.fabric_api = "0.141.4+1.21.11"
+deps.modmenu = "17.0.0"
+
+[neoforge."1.21.11"]
+mod.mc_compat = "[1.21.11]"
+deps.neo_loader = "21.11.42"
+
+
+["26.2.x"]
+mod.mc_releases = ["26.2"]
+deps.cloth_config = "26.2.155"
+
+
+[fabric."26.2.x"]
+mod.mc_compat = "~26.2"
+deps.fabric_api = "0.152.2+26.2"
+deps.modmenu = "20.0.0-beta.3"
+
+
+[neoforge."26.2.x"]
+mod.mc_compat = "[26.2, 26.3)"
+deps.neo_loader = "26.2.0.6-beta"

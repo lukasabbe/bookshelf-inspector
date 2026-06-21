@@ -1,0 +1,25 @@
+license = "CC0-1.0"
+
+modLoader="javafml"
+loaderVersion="[1,)"
+
+[[mods]]
+modId = "${id}"
+displayName = "${name}"
+version = "${version}"
+authors = "Me!"
+description = "This is an example description! Tell everyone what your mod is about!"
+
+logoFile = "../assets/bookshelfinspector/icon.png"
+#displayURL = "..."
+#issueTrackerUrl = "..."
+
+[[mixings]]
+config = "bookshelfinspector.mixins.json"
+
+[[dependencies.${id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft}"
+ordering = "NONE"
+side = "BOTH"

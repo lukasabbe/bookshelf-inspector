@@ -1,0 +1,77 @@
+package com.lukasabbe.config;
+
+import com.lukasabbe.ModLoaderAccess;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Map;
+
+public class Config {
+    public boolean lecternToggle = true;
+    public boolean shelfToggle = true;
+    public boolean shelfDisplayNormal = true;
+    public int scale = 10;
+    public boolean useRoman = false;
+
+    public void loadConfig(){
+        Path configPath = ModLoaderAccess.INSTANCE.getConfigPath("bookshelfinspector-config.yml");
+        if(!Files.exists(configPath)) createConfig(configPath);
+        Yaml yaml = new Yaml();
+        try{
+            Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
+            if(configMap.containsKey("lectern-toggle")){
+                lecternToggle = (boolean) configMap.get("lectern-toggle");
+            }
+            if(configMap.containsKey("shelf-toggle")){
+                shelfToggle = (boolean) configMap.get("shelf-toggle");
+            }
+            if(configMap.containsKey("shelf-display-normal")){
+                shelfDisplayNormal = (boolean) configMap.get("shelf-display-normal");
+            }
+            if(configMap.containsKey("scale")){
+                scale = (int) configMap.get("scale");
+            }
+            if(configMap.containsKey("roman")){
+                useRoman = (boolean) configMap.get("roman");
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createConfig(Path configPath){
+        Path defaultConfigPath = ModLoaderAccess.INSTANCE.getFileOrCopyInModContainer("bookshelfinspector", "bookshelfinspector-config.yml");
+        if(defaultConfigPath == null) return;
+        try {
+            Files.copy(defaultConfigPath, configPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveConfig(){
+        Path configPath = ModLoaderAccess.INSTANCE.getConfigPath("bookshelfinspector-config.yml");
+        if(!Files.exists(configPath)) createConfig(configPath);
+        Yaml yaml = new Yaml();
+        try{
+            Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
+            configMap.put("lectern-toggle",lecternToggle);
+            configMap.put("shelf-toggle",shelfToggle);
+            configMap.put("shelf-display-normal",shelfDisplayNormal);
+            configMap.put("scale",scale);
+            configMap.put("roman", useRoman);
+            FileWriter writer = new FileWriter(configPath.toString());
+            yaml.dump(configMap,writer);
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
