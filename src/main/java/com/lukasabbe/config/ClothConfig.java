@@ -21,6 +21,8 @@ public class ClothConfig {
                         .setTooltip(Component.translatable("bookshelfinspector.config.lectern.toggle.tooltip"))
                         .setDefaultValue(true)
                         .setSaveConsumer(val -> config.lecternToggle = val).build())
+                //?if >= 1.21.9 {
+                
                 .addEntry(entryBuilder
                         .startBooleanToggle(Component.translatable("bookshelfinspector.config.shelf.toggle"), config.shelfToggle)
                         .setTooltip(Component.translatable("bookshelfinspector.config.shelf.toggle.tooltip"))
@@ -31,6 +33,7 @@ public class ClothConfig {
                         .setTooltip(Component.translatable("bookshelfinspector.config.shelf.display.normal.tooltip"))
                         .setDefaultValue(true)
                         .setSaveConsumer(val -> config.shelfDisplayNormal = val).build())
+                //?}
                 .addEntry(entryBuilder
                         .startIntSlider(Component.translatable("bookshelfinspector.config.scale"), config.scale,0,20)
                         .setTooltip(Component.translatable("bookshelfinspector.config.scale.tooltip"))

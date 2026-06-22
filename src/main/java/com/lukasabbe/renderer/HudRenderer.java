@@ -5,6 +5,7 @@ import com.lukasabbe.data.BookData;
 import com.lukasabbe.data.Tags;
 import com.lukasabbe.util.ItemTools;
 import com.lukasabbe.util.RomanNumerals;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -148,18 +149,32 @@ public class HudRenderer {
     //?} elif <= 1.21.11 {
     /*private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
     *///?}
+        //?if >= 1.21.6 {
+        
         Matrix3x2fStack stack = context.pose();
         stack.pushMatrix();
         stack.translate(centerX, y);
         final float scale = (float) BookshelfInspectorClient.CONFIG.scale / 10;
         stack.scale(scale, scale);
         stack.translate(-centerX, -y);
+        //?}else {
+        /*PoseStack stack = context.pose();
+        stack.pushPose();
+        stack.translate(centerX, y, 0);
+        final float scale = (float) BookshelfInspectorClient.CONFIG.scale / 10;
+        stack.scale(scale, scale, scale);
+        stack.translate(-centerX, -y, 0);
+        *///?}
         //? if >= 26.1 {
-        
         context.centeredText(textRenderer,text,centerX,y,color);
         //?} elif <= 1.21.11 {
         /*context.drawCenteredString(textRenderer,text,centerX,y,color);
         *///?}
+        //?if >= 1.21.6 {
+        
         stack.popMatrix();
+        //?}else {
+        /*stack.popPose();
+        *///?}
     }
 }

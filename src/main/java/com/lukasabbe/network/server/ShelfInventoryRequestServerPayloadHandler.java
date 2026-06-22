@@ -1,4 +1,5 @@
 package com.lukasabbe.network.server;
+//?if >= 1.21.9 {
 
 import com.lukasabbe.BookshelfInspector;
 import com.lukasabbe.ModLoaderAccess;
@@ -25,3 +26,4 @@ public class ShelfInventoryRequestServerPayloadHandler implements ServerPayloadH
         ModLoaderAccess.INSTANCE.sendPacketFromServer(player, new BookShelfInventoryPayload(stack, shelfInventoryRequestPayload.pos(), shelfInventoryRequestPayload.slotNum()));
     }
 }
+//?}

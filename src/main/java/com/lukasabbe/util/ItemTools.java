@@ -20,7 +20,10 @@ public class ItemTools {
     }
 
     public static boolean isNormalStack(ItemStack itemStack) {
+        //?if >=1.21.3 {
+        
         if (!itemStack.getHoverName().equals(itemStack.getItemName())) return false;
+        //?}
 
         ItemEnchantments itemEnchantments = getItemEnchantments(itemStack);
         if (itemEnchantments != null && !itemEnchantments.isEmpty()) return false;

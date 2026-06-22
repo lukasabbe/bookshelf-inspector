@@ -31,13 +31,17 @@ repositories {
 
 dependencies {
     val yamlVersion = property("deps.yaml").toString()
-    val snakeYaml = create("org.yaml:snakeyaml") as ExternalModuleDependency
+    val yamlCoords = "org.yaml:snakeyaml"
 
-    snakeYaml.version {
-        prefer(yamlVersion)
+    jarJar(yamlCoords) {
+        this as ExternalModuleDependency
+        version {
+            prefer(yamlVersion)
+        }
     }
-    implementation(snakeYaml)
-    jarJar(snakeYaml)
+
+    implementation("$yamlCoords:$yamlVersion")
+
 }
 
 neoForge {

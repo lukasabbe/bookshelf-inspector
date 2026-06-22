@@ -35,9 +35,12 @@ public class BookshelfInspectorFabric implements ModInitializer, ClientModInitia
         ServerPlayNetworking.registerGlobalReceiver(
                 LecternInventoryRequestPayload.ID,
                 ((payload, context) -> BookshelfInspector.networkHandlers.lecternInventoryRequestServerPayloadHandler.receive(payload, context.player())));
+        //?if >= 1.21.9 {
+        
         ServerPlayNetworking.registerGlobalReceiver(
                 ShelfInventoryRequestPayload.ID,
                 (payload, context) -> BookshelfInspector.networkHandlers.shelfInventoryRequestServerPayloadHandler.receive(payload, context.player()));
+        //?}
         BookshelfInspector.init();
     }
 

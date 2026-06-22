@@ -33,11 +33,14 @@ public class NetworkHandler {
                 LecternInventoryRequestPayload.CODEC,
                 ((payload, context) -> BookshelfInspector.networkHandlers.lecternInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
         );
+        //?if >= 1.21.9 {
+        /^
         registrar.playToServer(
                 ShelfInventoryRequestPayload.ID,
                 ShelfInventoryRequestPayload.CODEC,
                 ((payload, context) -> BookshelfInspector.networkHandlers.shelfInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
         );
+        ^///?}
     }
 }
 *///?}

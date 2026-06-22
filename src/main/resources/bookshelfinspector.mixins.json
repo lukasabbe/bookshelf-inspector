@@ -3,6 +3,7 @@
   "package": "com.lukasabbe.mixin",
   "compatibilityLevel": "${java}",
   "mixins": [
+    "BookshelfInvoker"
   ],
   "injectors": {
     "defaultRequire": 1
