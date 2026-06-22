@@ -9,25 +9,25 @@ import java.io.*;
 import java.nio.file.Path;
 
 //? if fabric {
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+/*import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.FabricLoader;
-//?} elif neoforge {
-/*import net.neoforged.fml.ModContainer;
+*///?} elif neoforge {
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 import com.lukasabbe.entry.neoforge.EventHandler;
-*///?}
+//?}
 
 public sealed interface ModLoaderAccess {
     ModLoaderAccess INSTANCE =
-        /*? if fabric{*/new FabricLoaderAccess();
-        /*?} elif neoforge *///new NeoForgeLoaderAccess();
+        /*? if fabric{*//*new FabricLoaderAccess();
+        *//*?} elif neoforge */new NeoForgeLoaderAccess();
 
     Path getConfigPath(String file);
     Path getFileOrCopyInModContainer(String mod, String fileName);
@@ -38,7 +38,7 @@ public sealed interface ModLoaderAccess {
 
 
     //? if fabric {
-    final class FabricLoaderAccess implements ModLoaderAccess {
+    /*final class FabricLoaderAccess implements ModLoaderAccess {
         private final FabricLoader loader = FabricLoader.getInstance();
 
         @Override
@@ -76,8 +76,8 @@ public sealed interface ModLoaderAccess {
 
         }
     }
-    //?} elif neoforge {
-    /*final class NeoForgeLoaderAccess implements ModLoaderAccess {
+    *///?} elif neoforge {
+    final class NeoForgeLoaderAccess implements ModLoaderAccess {
 
         @Override
         public Path getConfigPath(String file) {
@@ -124,5 +124,5 @@ public sealed interface ModLoaderAccess {
             EventHandler.playerDisconnectEvents.add(event);
         }
     }
-    *///?}
+    //?}
 }

@@ -1,4 +1,4 @@
-license = "CC0-1.0"
+license = "MIT"
 
 modLoader="javafml"
 loaderVersion="[1,)"
@@ -7,14 +7,14 @@ loaderVersion="[1,)"
 modId = "${id}"
 displayName = "${name}"
 version = "${version}"
-authors = "Me!"
-description = "This is an example description! Tell everyone what your mod is about!"
+authors = "lukasabbe"
+description = "Inspect any book in a chiseled bookshelf."
 
 logoFile = "../assets/bookshelfinspector/icon.png"
 #displayURL = "..."
 #issueTrackerUrl = "..."
 
-[[mixings]]
+[[mixins]]
 config = "bookshelfinspector.mixins.json"
 
 [[dependencies.${id}]]

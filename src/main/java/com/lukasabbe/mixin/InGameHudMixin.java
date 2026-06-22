@@ -1,6 +1,7 @@
 package com.lukasabbe.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.lukasabbe.Constants;
 import com.lukasabbe.renderer.HudRenderer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
