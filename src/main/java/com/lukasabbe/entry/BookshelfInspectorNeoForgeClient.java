@@ -1,6 +1,6 @@
 package com.lukasabbe.entry;
 //? if neoforge {
-import com.lukasabbe.BookshelfInspectorClient;
+/*import com.lukasabbe.BookshelfInspectorClient;
 import com.lukasabbe.Constants;
 import com.lukasabbe.config.ClothConfig;
 import com.lukasabbe.entry.neoforge.EventHandler;
@@ -18,5 +18,5 @@ public class BookshelfInspectorNeoForgeClient {
         ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, parent) -> ClothConfig.getClothConfigScreen(parent));
     }
 }
-//?}
+*///?}
 

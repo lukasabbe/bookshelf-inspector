@@ -1,6 +1,6 @@
 package com.lukasabbe.entry.neoforge;
 //? if neoforge {
-import com.lukasabbe.BookshelfInspector;
+/*import com.lukasabbe.BookshelfInspector;
 import com.lukasabbe.Constants;
 import com.lukasabbe.network.packets.*;
 import net.minecraft.client.player.LocalPlayer;
@@ -40,4 +40,4 @@ public class NetworkHandler {
         );
     }
 }
-//?}
+*///?}

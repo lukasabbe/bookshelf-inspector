@@ -1,7 +1,7 @@
 package com.lukasabbe.entry;
 
 //? if neoforge {
-import com.lukasabbe.BookshelfInspector;
+/*import com.lukasabbe.BookshelfInspector;
 import com.lukasabbe.Constants;
 import com.lukasabbe.entry.neoforge.EventHandler;
 import com.lukasabbe.entry.neoforge.NetworkHandler;
@@ -17,4 +17,4 @@ public class BookshelfInspectorNeoForge {
         BookshelfInspector.init();
     }
 }
-//?}
+*///?}

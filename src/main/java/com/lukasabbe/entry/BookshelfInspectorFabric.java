@@ -1,7 +1,7 @@
 package com.lukasabbe.entry;
 
 //? if fabric {
-/*import com.lukasabbe.BookshelfInspector;
+import com.lukasabbe.BookshelfInspector;
 import com.lukasabbe.BookshelfInspectorClient;
 import com.lukasabbe.network.packets.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -42,4 +42,4 @@ public class BookshelfInspectorFabric implements ModInitializer, ClientModInitia
         BookshelfInspectorClient.clientInit();
     }
 }
-*///?}
+//?}

@@ -1,6 +1,6 @@
 package com.lukasabbe.entry.neoforge;
 //? if neoforge {
-import com.lukasabbe.handlers.OnPlayerDisconnectEvent;
+/*import com.lukasabbe.handlers.OnPlayerDisconnectEvent;
 import com.lukasabbe.handlers.OnPlayerJoinEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
@@ -27,4 +27,4 @@ public class EventHandler {
         playerDisconnectEvents.forEach(OnPlayerDisconnectEvent::onDisconnect);
     }
 }
-//?}
+*///?}
