@@ -58,8 +58,8 @@ dependencies {
     //Mod menu
     val modMenu = property("deps.modmenu") as String
 
-    api("me.shedaniel.cloth:cloth-config-fabric:$clothConfig")
-    api("com.terraformersmc:modmenu:$modMenu")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:$clothConfig")
+    modApi("com.terraformersmc:modmenu:$modMenu")
 }
 
 loom {

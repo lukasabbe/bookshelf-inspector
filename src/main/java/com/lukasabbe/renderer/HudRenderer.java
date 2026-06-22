@@ -8,7 +8,6 @@ import com.lukasabbe.util.RomanNumerals;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.*;
@@ -21,10 +20,27 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.joml.Matrix3x2fStack;
 
+//? if >= 26.1 {
+
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+//?} elif <= 1.21.11 {
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?}
+
 public class HudRenderer {
+    //? if >= 26.1 {
+    
     public static void hudRender(GuiGraphicsExtractor context, Minecraft client){
+     //?} elif <= 1.21.11 {
+    /*public static void hudRender(GuiGraphics context, Minecraft client){
+    *///?}
         if(!BookshelfInspectorClient.modAvailable) return;
+        //? if >= 26.1 {
+        
         if(client.gui.hud.isHidden()) return;
+        //?} elif <= 1.21.11 {
+        /*if(client.options.hideGui) return;
+        *///?}
         if(!BookshelfInspectorClient.bookShelfData.isCurrentBookDataToggled) return;
 
         final BookData currentBookData = BookshelfInspectorClient.currentBookData;
@@ -126,14 +142,24 @@ public class HudRenderer {
         }
     }
 
+    //? if >= 26.1 {
+    
     private static void drawScaledText(GuiGraphicsExtractor context, Component text, int centerX, int y, int color, Font textRenderer){
+    //?} elif <= 1.21.11 {
+    /*private static void drawScaledText(GuiGraphics context, Component text, int centerX, int y, int color, Font textRenderer){
+    *///?}
         Matrix3x2fStack stack = context.pose();
         stack.pushMatrix();
         stack.translate(centerX, y);
         final float scale = (float) BookshelfInspectorClient.CONFIG.scale / 10;
         stack.scale(scale, scale);
         stack.translate(-centerX, -y);
+        //? if >= 26.1 {
+        
         context.centeredText(textRenderer,text,centerX,y,color);
+        //?} elif <= 1.21.11 {
+        /*context.drawCenteredString(textRenderer,text,centerX,y,color);
+        *///?}
         stack.popMatrix();
     }
 }
