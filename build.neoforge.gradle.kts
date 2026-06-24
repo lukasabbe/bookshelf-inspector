@@ -1,6 +1,7 @@
 plugins {
     id("net.neoforged.moddev") version "2.0.140"
     id("neoforge-mutex")
+    id("me.modmuss50.mod-publish-plugin") version "2.0.1"
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -113,5 +114,21 @@ tasks {
         inputs.property("version", project.property("mod.version"))
         from(jar.flatMap { it.archiveFile }, named<Jar>("sourcesJar").flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+}
+publishMods {
+    val mrToken = providers.environmentVariable("MODRINTH_TOKEN")
+    val modVersion = "${project.property("mod.version")}+${stonecutter.current.version}"
+    type.set(BETA)
+    file.set( tasks.jar.map { it.archiveFile.get() })
+    changelog.set(provider { rootProject.file("CHANGELOG.md").readText() })
+    modLoaders.add("neoforge")
+    version.set(modVersion)
+    displayName.set(modVersion)
+
+    modrinth {
+        projectId = "rOrXjyPb"
+        accessToken = mrToken
+        minecraftVersions.add(stonecutter.current.version)
     }
 }

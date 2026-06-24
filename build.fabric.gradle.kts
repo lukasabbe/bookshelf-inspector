@@ -1,6 +1,7 @@
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
+    id("me.modmuss50.mod-publish-plugin") version "2.0.1"
 }
 
 // DO NOT set group = ...!
@@ -119,5 +120,23 @@ tasks {
         // loomx.mod(Sources)Jar returns the jar task for the applied loom variant
         from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+}
+
+publishMods {
+    val mrToken = providers.environmentVariable("MODRINTH_TOKEN")
+    val modVersion = "${project.property("mod.version")}+${stonecutter.current.version}"
+    type.set(BETA)
+    file.set(tasks.jar.map { it.archiveFile.get() })
+    changelog.set(provider { rootProject.file("CHANGELOG.md").readText() })
+    modLoaders.add("fabric")
+    version.set(modVersion)
+    displayName.set(modVersion)
+
+    modrinth {
+        projectId = "rOrXjyPb"
+        accessToken = mrToken
+        requires("fabric-api")
+        minecraftVersions.add(stonecutter.current.version)
     }
 }
