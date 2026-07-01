@@ -58,10 +58,10 @@ mod.mc_compat = "[26.2, 26.3)"
 deps.neo_loader = "26.2.0.6-beta"
 
 ["26.3.x"]
-mod.mc_releases = ["26.3-snapshot-1"]
+mod.mc_releases = ["26.3-snapshot-2"]
 deps.cloth_config = "26.2.155"
 
 [fabric."26.3.x"]
-mod.mc_compat = "~26.3-alpha.1"
-deps.fabric_api = "0.153.1+26.3"
+mod.mc_compat = "~26.3-alpha.2"
+deps.fabric_api = "0.153.2+26.3"
 deps.modmenu = "20.0.0-beta.3"
