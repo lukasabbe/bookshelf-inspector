@@ -22,9 +22,9 @@ import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.network.PacketDistributor;
 import com.lukasabbe.entry.neoforge.EventHandler;
 //?if >= 1.21.10{
-/^
+
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-^///?}
+//?}
 *///?}
 
 public sealed interface ModLoaderAccess {
@@ -92,7 +92,7 @@ public sealed interface ModLoaderAccess {
             if(ModList.get().getModContainerById(mod).isEmpty()) return null;
             ModContainer container = ModList.get().getModContainerById(mod).get();
             //?if >= 1.21.10{
-            /^
+            
             try {
                 InputStream inputStream = container.getModInfo().getOwningFile().getFile().getContents().get(fileName).open();
                 File targetFile = new File(getConfigPath("bookshelfinspector-config.yml").toUri());
@@ -105,9 +105,9 @@ public sealed interface ModLoaderAccess {
                 }catch (IOException ignore){}
             }catch (IOException ignore){}
             return null;
-            ^///?}else {
-            return container.getModInfo().getOwningFile().getFile().findResource(fileName);
-            //?}
+            //?}else {
+            /^return container.getModInfo().getOwningFile().getFile().findResource(fileName);
+            ^///?}
         }
 
         @Override
@@ -120,11 +120,11 @@ public sealed interface ModLoaderAccess {
         @Override
         public void sendPacketFromClient(CustomPacketPayload payload) {
             //?if >= 1.21.10{
-            /^
+            
             ClientPacketDistributor.sendToServer(payload);
-            ^///?}else{
-            PacketDistributor.sendToServer(payload);
-            //?}
+            //?}else{
+            /^PacketDistributor.sendToServer(payload);
+            ^///?}
         }
 
         @Override

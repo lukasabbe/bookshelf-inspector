@@ -30,20 +30,6 @@ repositories {
 }
 
 
-dependencies {
-    val yamlVersion = property("deps.yaml").toString()
-    val yamlCoords = "org.yaml:snakeyaml"
-
-    jarJar(yamlCoords) {
-        this as ExternalModuleDependency
-        version {
-            prefer(yamlVersion)
-        }
-    }
-
-    implementation("$yamlCoords:$yamlVersion")
-
-}
 
 neoForge {
     version = property("deps.neo_loader") as String
@@ -72,6 +58,25 @@ neoForge {
         val clothConfig = property("deps.cloth_config") as String
         api ("me.shedaniel.cloth:cloth-config-neoforge:$clothConfig")
     }
+}
+
+dependencies {
+    val yamlVersion = property("deps.yaml").toString()
+    val yamlCoords = "org.yaml:snakeyaml"
+
+    jarJar(yamlCoords) {
+        this as ExternalModuleDependency
+        version {
+            prefer(yamlVersion)
+        }
+    }
+
+    implementation("$yamlCoords:$yamlVersion")
+
+    if (stonecutter.eval(stonecutter.current.version, "=1.21.1")) {
+        "additionalRuntimeClasspath"("$yamlCoords:$yamlVersion")
+    }
+
 }
 
 java {

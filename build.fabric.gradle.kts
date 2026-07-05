@@ -127,7 +127,11 @@ publishMods {
     val mrToken = providers.environmentVariable("MODRINTH_TOKEN")
     val modVersion = "${project.property("mod.version")}+${stonecutter.current.version}"
     type.set(BETA)
-    file.set(tasks.jar.map { it.archiveFile.get() })
+    if (stonecutter.eval(stonecutter.current.version, "<=1.21.11")) {
+        file.set(tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar").flatMap { it.archiveFile })
+    }else {
+        file.set(tasks.jar.map { it.archiveFile.get() })
+    }
     changelog.set(provider { rootProject.file("CHANGELOG.md").readText() })
     modLoaders.add("fabric")
     version.set(modVersion)
