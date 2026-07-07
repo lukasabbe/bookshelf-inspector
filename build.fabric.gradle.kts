@@ -54,13 +54,14 @@ dependencies {
 
     include(implementation("org.yaml:snakeyaml:${property("deps.yaml")}")!!)
 
+    if (stonecutter.eval(stonecutter.current.version, "<=26.2")) {
+        //Mod menu
+        val modMenu = property("deps.modmenu") as String
+        modApi("com.terraformersmc:modmenu:$modMenu")
+    }
     //Cloth config
     val clothConfig = property("deps.cloth_config") as String
-    //Mod menu
-    val modMenu = property("deps.modmenu") as String
-
     modApi("me.shedaniel.cloth:cloth-config-fabric:$clothConfig")
-    modApi("com.terraformersmc:modmenu:$modMenu")
 }
 
 loom {
