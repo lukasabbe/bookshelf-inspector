@@ -50,7 +50,7 @@ dependencies {
 
     // Use `mod{dependency type}` even on 26.1+ - loom-back-compat converts them
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0")
+    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0", "fabric-renderer-api-v1", "fabric-rendering-v1", "fabric-renderer-indigo")
 
     include(implementation("org.yaml:snakeyaml:${property("deps.yaml")}")!!)
 

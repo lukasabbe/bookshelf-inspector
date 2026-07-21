@@ -2,7 +2,7 @@
 mod.id = "bookshelfinspector"
 mod.name = "Bookshelf Inspector"
 mod.group = "com.lukasabbe"
-mod.version = "2.3"
+mod.version = "2.4"
 
 deps.fabric_loader = "0.19.3"
 loomx.loom_version = "1.17-SNAPSHOT"

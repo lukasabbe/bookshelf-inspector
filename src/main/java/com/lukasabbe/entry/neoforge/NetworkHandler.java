@@ -35,12 +35,12 @@ public class NetworkHandler {
         );
         //?if >= 1.21.9 {
         
-        registrar.playToServer(
+        /^registrar.playToServer(
                 ShelfInventoryRequestPayload.ID,
                 ShelfInventoryRequestPayload.CODEC,
                 ((payload, context) -> BookshelfInspector.networkHandlers.shelfInventoryRequestServerPayloadHandler.receive(payload, (ServerPlayer) context.player()))
         );
-        //?}
+        ^///?}
     }
 }
 *///?}

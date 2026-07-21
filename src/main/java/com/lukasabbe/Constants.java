@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 public class Constants {
     public static final String MOD_ID = "bookshelfinspector";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    public static final String VERSION = /*$ mod_version*/ "2.3";
+    public static final String VERSION = /*$ mod_version*/ "2.4";
     public static final String MINECRAFT = /*$ minecraft*/ "26.2";
     public static final Identifier BOOK_SHELF_INVENTORY_REQUEST_PACKET_ID = id(VERSION,"book_shelf_inventory_request");
     public static final Identifier BOOK_SHELF_INVENTORY_PACKET_ID = id(MOD_ID,"book_shelf_inventory");
