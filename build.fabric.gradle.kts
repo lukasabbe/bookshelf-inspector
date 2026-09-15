@@ -54,7 +54,7 @@ dependencies {
 
     include(implementation("org.yaml:snakeyaml:${property("deps.yaml")}")!!)
 
-    if (stonecutter.eval(stonecutter.current.version, "<=26.2")) {
+    if (stonecutter.eval(stonecutter.current.version, "<=26.3")) {
         //Mod menu
         val modMenu = property("deps.modmenu") as String
         modApi("com.terraformersmc:modmenu:$modMenu")
