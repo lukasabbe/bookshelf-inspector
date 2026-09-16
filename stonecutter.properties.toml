@@ -52,7 +52,6 @@ mod.mc_compat = "~26.2"
 deps.fabric_api = "0.152.2+26.2"
 deps.modmenu = "20.0.0-beta.3"
 
-
 [neoforge."26.2.x"]
 mod.mc_compat = "[26.2, 26.3)"
 deps.neo_loader = "26.2.0.6-beta"
@@ -65,3 +64,7 @@ deps.cloth_config = "26.3.158"
 mod.mc_compat = "~26.3"
 deps.fabric_api = "0.160.5+26.3"
 deps.modmenu = "21.0.0-beta.1"
+
+[neoforge."26.3.x"]
+mod.mc_compat = "[26.3, 26.4)"
+deps.neo_loader = "26.3.0.1-beta"

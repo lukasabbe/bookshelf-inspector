@@ -9,8 +9,6 @@ displayName = "${name}"
 version = "${version}"
 authors = "lukasabbe"
 description = "Inspect any book in a chiseled bookshelf."
-
-logoFile = "../assets/bookshelfinspector/icon.png"
 #displayURL = "..."
 #issueTrackerUrl = "..."
 
