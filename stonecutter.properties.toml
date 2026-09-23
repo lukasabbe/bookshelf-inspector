@@ -68,3 +68,12 @@ deps.modmenu = "21.0.0-beta.1"
 [neoforge."26.3.x"]
 mod.mc_compat = "[26.3, 26.4)"
 deps.neo_loader = "26.3.0.1-beta"
+
+["26.4.x"]
+mod.mc_releases = ["26.4"]
+deps.cloth_config = "26.3.158"
+
+[fabric."26.4.x"]
+mod.mc_compat = "~26.4-alpha.1"
+deps.fabric_api = "0.161.1+26.4"
+deps.modmenu = "21.0.0-beta.1"
